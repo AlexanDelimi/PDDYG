@@ -10,3 +10,4 @@ https://www.youtube.com/watch?v=-CnrkvpHZAY
 
 Έτοιμο : 
 https://sites.google.com/site/mikescoderama/Home/kd-tree-knn
+https://salzis.wordpress.com/2014/06/28/kd-tree-and-nearest-neighbor-nn-search-2d-case/
