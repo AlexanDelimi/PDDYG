@@ -1,0 +1,12 @@
+Τι ειναι:											
+https://www.youtube.com/watch?v=XG4zpiJAkD4
+
+Why does this work? and Nearest neighbor:
+https://www.youtube.com/watch?v=Glp7THUpGow
+https://www.youtube.com/watch?v=mxrUFkdXaR8 
+
+Querying:
+https://www.youtube.com/watch?v=-CnrkvpHZAY
+
+Έτοιμο : 
+https://sites.google.com/site/mikescoderama/Home/kd-tree-knn
