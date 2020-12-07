@@ -2,4 +2,4 @@
 
 import numpy as np
 print('hello λοοολ')
-print('pame')
+print('den egine')
