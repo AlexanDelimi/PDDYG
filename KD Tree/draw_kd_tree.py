@@ -6,6 +6,7 @@ and use the functions 'plot_figure' and 'plot_tree' to visualize the kd tree.
 '''
 
 from wiki_based_code import kdtree
+from insert_serially import kdtree_serially
 from pprint import pprint
 from operator import itemgetter
 import matplotlib.pyplot as plt
@@ -67,8 +68,8 @@ def plot_tree(tree, min_x, max_x, min_y, max_y, prev_node, branch, dimensions, d
         plot_tree(right_branch, min_x, max_x, min_y, max_y, cur_node, False, dimensions, depth+1)
 
 
-def plot_figure(kd_tree, dimensions, min_val, max_val, delta):
-    plt.figure("K-d Tree")
+def plot_figure(kd_tree, dimensions, min_val, max_val, delta, title):
+    plt.figure(title)
     plt.axis( [min_val-delta, max_val+delta, min_val-delta, max_val+delta] )
     
     plt.grid(b=True, which='major', color='0.75', linestyle='--')
@@ -86,23 +87,35 @@ def plot_figure(kd_tree, dimensions, min_val, max_val, delta):
               dimensions= dimensions)
     
     plt.title('K-D Tree')
-    plt.show()
-    plt.close()
+    # plt.show()
 
 
 def main():
     
-    point_list = [(7, 2), (5, 4), (9, 6), (4, 7), (8, 1), (2, 3)]
+    point_list = [(2, 3), (7, 2), (5, 4), (9, 6), (4, 7), (8, 1)]
     dims = len(point_list[0])
 
     min_val = min(min(point_list, key=itemgetter(0))[0],min(point_list, key=itemgetter(1))[1])
     max_val = max(max(point_list, key=itemgetter(0))[0],max(point_list, key=itemgetter(1))[1])
     delta = 2
 
+    ########## insert median ##########
+
     kd_tree = kdtree(point_list, dims).to_dict()
     pprint(kd_tree)  # the print order is a little bit crazy but okay
 
-    plot_figure(kd_tree, dims, min_val, max_val, delta)
+    plot_figure(kd_tree, dims, min_val, max_val, delta, 1)
+
+    ########## insert serial ##########
+
+    kd_tree_ser = kdtree_serially(None, point_list, dims).to_dict()
+    pprint(kd_tree_ser)  # the print order is a little bit crazy but okay
+
+    plot_figure(kd_tree_ser, dims, min_val, max_val, delta, 2)
+
+    ########## show all trees #########
+
+    plt.show()
 
 
 if __name__ == "__main__":
