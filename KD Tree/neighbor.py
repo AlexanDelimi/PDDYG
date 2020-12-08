@@ -32,44 +32,53 @@ def closest_node(temp_node, best_node, target_point):
         return best_node
 
 
-def nearest_neighbor(root, target_point, dims, depth):
+def nearest_neighbor(root, target_point, dims, depth, nearest_list):
 
     if root is None:
         return None
 
-    nextBranch = None
-    otherBranch = None
-
-    axis = depth % dims            # select axis based on depth
-    # compare the property appropriate for the current depth
-    if target_point[axis] < root.point[axis]:
-        nextBranch = root.left_child
-        otherBranch = root.right_child
+    if root.point in nearest_list:
+        
+        nearest_left = nearest_neighbor(root.left_child, target_point, dims, depth + 1, nearest_list)
+        nearest_right = nearest_neighbor(root.right_child, target_point, dims, depth + 1, nearest_list)
+        
+        return closest_node(nearest_left, nearest_right, target_point)
+    
     else:
-        nextBranch = root.right_child
-        otherBranch = root.left_child
 
-    # recurse down the branch that's best according to the current depth
-    temp_node = nearest_neighbor(nextBranch, target_point, dims, depth + 1)
-    best_node = closest_node(temp_node, root, target_point)
+        nextBranch = None
+        otherBranch = None
 
-    squared_radius = squared_distance(target_point, best_node.point)
+        axis = depth % dims            # select axis based on depth
+        # compare the property appropriate for the current depth
+        if target_point[axis] < root.point[axis]:
+            nextBranch = root.left_child
+            otherBranch = root.right_child
+        else:
+            nextBranch = root.right_child
+            otherBranch = root.left_child
 
-    # We may need to check the other side of the tree. If the other side is closer than the radius,
-    # then we must recurse to the other side as well. 'dist' is either a horizontal or a vertical line
-    # that goes to an imaginary line that is splitting the plane by the root point.
+        # recurse down the branch that's best according to the current depth
+        temp_node = nearest_neighbor(nextBranch, target_point, dims, depth + 1, nearest_list)
+        best_node = closest_node(temp_node, root, target_point)
 
-    absolute_distance = target_point[axis] - root.point[axis]
+        squared_radius = squared_distance(target_point, best_node.point)
 
-    if squared_radius >= absolute_distance**2:
-        temp_node = nearest_neighbor(otherBranch, target_point, dims, depth + 1)
-        best_node = closest_node(temp_node, best_node, target_point)
+        # We may need to check the other side of the tree. If the other side is closer than the radius,
+        # then we must recurse to the other side as well. 'dist' is either a horizontal or a vertical line
+        # that goes to an imaginary line that is splitting the plane by the root point.
 
-    return best_node
+        absolute_distance = target_point[axis] - root.point[axis]
+
+        if squared_radius >= absolute_distance**2:
+            temp_node = nearest_neighbor(otherBranch, target_point, dims, depth + 1, nearest_list)
+            best_node = closest_node(temp_node, best_node, target_point)
+
+        return best_node
 
 
 def main():
-    point_list = [(1,0), (0,1), (0,5), (0,6)]
+    point_list = [(1,0), (0,1), (1,1), (0,6), (2,3)]
     dims = len(point_list[0])
 
     ########## insert median ##########
@@ -77,7 +86,7 @@ def main():
     tree = kdtree_batch(point_list=point_list, dimensions=dims)
     pprint(tree.to_dict())  # the print order is a little bit crazy but okay
 
-    nn = nearest_neighbor(tree, (0,2), dims, 0)
+    nn = nearest_neighbor(tree, (0,0), dims, 0, [(1,0),(0,1)])
     print(nn.point)
 
     ########## insert serial ##########
@@ -85,7 +94,7 @@ def main():
     tree = kdtree_serial(None, point_list, dims)
     pprint(tree.to_dict())  # the print order is a little bit crazy but okay
 
-    nn = nearest_neighbor(tree, (0,2), dims, 0)
+    nn = nearest_neighbor(tree, (0,2), dims, 0, [])
     print(nn.point)
 
 
