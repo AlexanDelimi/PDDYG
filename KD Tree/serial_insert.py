@@ -39,8 +39,8 @@ def kdtree_serial(root, point_list, dimensions):
 def main():
     point_list = [(2, 3), (7, 2), (5, 4), (9, 6), (4, 7), (8, 1)]
     dims = len(point_list[0])
-    tree = kdtree_serial(None, point_list, dims).to_dict()
-    pprint(tree)  # the print order is a little bit crazy but okay
+    tree = kdtree_serial(None, point_list, dims)
+    pprint(tree.to_dict())  # the print order is a little bit crazy but okay
 
 
 if __name__ == "__main__":

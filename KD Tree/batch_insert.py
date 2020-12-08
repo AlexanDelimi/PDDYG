@@ -40,10 +40,8 @@ def kdtree_batch(point_list, dimensions, depth: int = 0):
 
 def main():
     point_list = [(7, 2), (5, 4), (9, 6), (4, 7), (8, 1), (2, 3)]
-    tree = kdtree_batch(point_list=point_list, 
-                        dimensions=len(point_list[0])
-                        ).to_dict()
-    pprint(tree)  # the print order is a little bit crazy but okay
+    tree = kdtree_batch(point_list=point_list, dimensions=len(point_list[0]))
+    pprint(tree.to_dict())  # the print order is a little bit crazy but okay
 
 
 if __name__ == "__main__":
