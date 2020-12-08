@@ -1,4 +1,5 @@
 from batch_insert import kdtree_batch
+from serial_insert import kdtree_serial
 from pprint import pprint
 
 
@@ -68,13 +69,23 @@ def nearest_neighbor(root, target_point, dims, depth):
 
 
 def main():
-    point_list = [(0,1), (0,5), (0,6), (1,0)]
+    point_list = [(1,0), (0,1), (0,5), (0,6)]
     dims = len(point_list[0])
+
+    ########## insert median ##########
 
     tree = kdtree_batch(point_list=point_list, dimensions=dims)
     pprint(tree.to_dict())  # the print order is a little bit crazy but okay
 
-    nn = nearest_neighbor(tree, (3,4), dims, 0)
+    nn = nearest_neighbor(tree, (0,2), dims, 0)
+    print(nn.point)
+
+    ########## insert serial ##########
+
+    tree = kdtree_serial(None, point_list, dims)
+    pprint(tree.to_dict())  # the print order is a little bit crazy but okay
+
+    nn = nearest_neighbor(tree, (0,2), dims, 0)
     print(nn.point)
 
 
