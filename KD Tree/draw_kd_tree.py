@@ -5,8 +5,8 @@ We create the tree using 'kdtree' function from 'wiki_based_code.py'
 and use the functions 'plot_figure' and 'plot_tree' to visualize the kd tree.
 '''
 
-from wiki_based_code import kdtree
-from insert_serially import kdtree_serially
+from batch_insert import kdtree_batch
+from serial_insert import kdtree_serial
 from pprint import pprint
 from operator import itemgetter
 import matplotlib.pyplot as plt
@@ -101,15 +101,15 @@ def main():
 
     ########## insert median ##########
 
-    kd_tree = kdtree(point_list, dims).to_dict()
-    pprint(kd_tree)  # the print order is a little bit crazy but okay
+    kd_tree = kdtree_batch(point_list, dims).to_dict()
+    pprint(kd_tree)
 
     plot_figure(kd_tree, dims, min_val, max_val, delta, 1)
 
     ########## insert serial ##########
 
-    kd_tree_ser = kdtree_serially(None, point_list, dims).to_dict()
-    pprint(kd_tree_ser)  # the print order is a little bit crazy but okay
+    kd_tree_ser = kdtree_serial(None, point_list, dims).to_dict()
+    pprint(kd_tree_ser)
 
     plot_figure(kd_tree_ser, dims, min_val, max_val, delta, 2)
 
