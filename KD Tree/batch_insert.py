@@ -9,7 +9,6 @@ from operator import itemgetter
 from pprint import pprint
 from node_class import Node
 
- 
 
 def kdtree_batch(point_list, dimensions, depth: int = 0):
     
@@ -18,8 +17,6 @@ def kdtree_batch(point_list, dimensions, depth: int = 0):
     
     axis = depth % dimensions               # select axis based on depth
     point_list.sort(key=itemgetter(axis))   # sort point list by axis
-    
-    '''TODO sort outside the function'''
     
     median = len(point_list) // 2           # index of median point
 
