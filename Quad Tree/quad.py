@@ -1,7 +1,7 @@
 # hello
 
-import numpy as np
-print('hello λοοολ')
-print('den egine')
-# aaaa
-# eeee
+import numpy
+
+print('olakalaaaaaa')
+# δουλεψε καλο μου
+# πλιιιζ
