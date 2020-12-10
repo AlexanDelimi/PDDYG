@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
-import random
 import matplotlib.patches as patches
-import numpy as np
 
 
 class Point:
@@ -30,13 +28,18 @@ class Node:
 
 
 class QTree:
-    def __init__(self, k, n):                                                                    #k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
+    def __init__(self, k, lista):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
         self.threshold = k
-        self.points = [Point(random.uniform(0, 10), random.uniform(0, 10)) for x in range(n)]
-        self.root = Node(0, 0, 10, 10, self.points)
+        self.points = []
+        self.addManyPoints(lista)
+        self.root = Node(0, 0, self.width(lista), self.height(lista), points)
 
     def add_point(self, x, y):
         self.points.append(Point(x, y))
+
+    def addManyPoints(self, lista):
+        for point in lista:
+            self.add_point(point[0], point[1])
 
     def get_points(self):
         return self.points
@@ -63,6 +66,20 @@ class QTree:
         plt.plot(x, y, 'ro')
         plt.show()
         return
+
+    def height(self, lista):
+        first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
+        first_x = first_and_second[0][0]
+        last_x = first_and_second[-1][0]
+        height = abs(first_x) + abs(last_x)
+        return height
+
+    def width(self, lista):
+        first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
+        first_y = first_and_second[0][1]
+        last_y = first_and_second[-1][1]
+        width = abs(first_y) + abs(last_y)
+        return width
 
 
 def recursive_subdivide(node, k):
@@ -94,7 +111,7 @@ def recursive_subdivide(node, k):
 def contains(x, y, w, h, points):
     pts = []
     for point in points:
-        if point.x < x or point.x > x + w or point.y < y or point.y > y + h:
+        if point[0] < x or point[0] > x + w or point[1] < y or point[1] > y + h:
             continue
         pts.append(point)
     return pts
@@ -110,18 +127,11 @@ def find_children(node):
     return children
 
 
-DPI = 72
-np.random.seed(60)
+points = [(-3, 1), (-5, 3), (-2, 4), (0, 0), (1, 1), (4, 1), (2, 3)]
 
-width, height = 600, 400
-
-N = 500
-coords = np.random.randn(N, 2) * height/3 + (width/2, height/2)
-points = [Point(*coord) for coord in coords]
-
-domain = Node(width/2, height/2, width, height, points)
-qtree = QTree(3, 10)
+# height_width(points)
+qtree = QTree(3, points)
 qtree.subdivide()
 qtree.graph()
-
-#
+print(qtree.height(points))
+print(qtree.width(points))
