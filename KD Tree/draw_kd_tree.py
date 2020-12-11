@@ -1,9 +1,9 @@
-'''
+"""
 The code for plotting is based on this web page
 https://salzis.wordpress.com/2014/06/28/kd-tree-and-nearest-neighbor-nn-search-2d-case/ .
 We create the tree using 'kdtree' function from 'wiki_based_code.py'
 and use the functions 'plot_figure' and 'plot_tree' to visualize the kd tree.
-'''
+"""
 
 from wiki_based_code import kdtree
 from insert_serially import kdtree_serially
