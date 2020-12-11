@@ -5,8 +5,8 @@ We create the tree using 'kdtree' function from 'wiki_based_code.py'
 and use the functions 'plot_figure' and 'plot_tree' to visualize the kd tree.
 """
 
-from wiki_based_code import kdtree
-from insert_serially import kdtree_serially
+from batch_insert import kdtree_batch
+from serial_insert import kdtree_serial
 from pprint import pprint
 from operator import itemgetter
 import matplotlib.pyplot as plt
@@ -21,9 +21,9 @@ def plot_tree(tree, min_x, max_x, min_y, max_y, prev_node, branch, dimensions, d
     # branch        True if (sub)tree is left child of parent node, 
     #               False if (sub)tree is right child of parent node
  
-    cur_node = tree['point']
-    left_branch = tree['left child']
-    right_branch = tree['right child']
+    cur_node = tree.point
+    left_branch = tree.left_child
+    right_branch = tree.right_child
  
     # set line's width depending on tree's depth
     if depth > len(line_width)-1:
@@ -101,15 +101,15 @@ def main():
 
     ########## insert median ##########
 
-    kd_tree = kdtree(point_list, dims).to_dict()
-    pprint(kd_tree)  # the print order is a little bit crazy but okay
+    kd_tree = kdtree_batch(point_list, dims)
+    pprint(kd_tree.to_dict())
 
     plot_figure(kd_tree, dims, min_val, max_val, delta, 1)
 
     ########## insert serial ##########
 
-    kd_tree_ser = kdtree_serially(None, point_list, dims).to_dict()
-    pprint(kd_tree_ser)  # the print order is a little bit crazy but okay
+    kd_tree_ser = kdtree_serial(None, point_list, dims)
+    pprint(kd_tree_ser.to_dict())
 
     plot_figure(kd_tree_ser, dims, min_val, max_val, delta, 2)
 
