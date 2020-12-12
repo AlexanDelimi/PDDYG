@@ -1,0 +1,28 @@
+How to measure elapsed time in Python?
+https://stackoverflow.com/questions/7370801/how-to-measure-elapsed-time-in-python
+
+Python Timer Functions: Three Ways to Monitor Your Code
+https://realpython.com/python-timer/
+
+    | |
+    | |
+  --   --
+   \   /
+    \ /
+     V
+
+time.perf_counter() → float
+https://docs.python.org/3/library/time.html#time.perf_counter
+
+time.process_time() → float
+https://docs.python.org/3/library/time.html#time.process_time
+
+    | |
+    | |
+  --   --
+   \   /
+    \ /
+     V
+     
+what is the difference between time.perf_counter() and time.process_time()?
+https://stackoverflow.com/questions/52222002/what-is-the-difference-between-time-perf-counter-and-time-process-time/52228375
