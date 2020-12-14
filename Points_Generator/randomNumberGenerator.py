@@ -45,9 +45,9 @@ def main():
             filename = number + filename
             number = int(number)
             lists = []
-            for i in range(number):
+            for _ in range(number):
                 lists.append(Coordinates())
-            for y in range(number):
+            for _ in range(number):
                 #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
@@ -67,9 +67,9 @@ def main():
             membery2 = int(membery2)
             membery1 = int(membery1)
             lists = []
-            for i in range(number):
+            for _ in range(number):
                 lists.append(Tuples(memberx1, memberx2, membery1, membery2))
-            for y in range(number):
+            for _ in range(number):
                 #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
@@ -89,9 +89,9 @@ def main():
             membery2 = int(membery2)
             membery1 = int(membery1)
             lists = []
-            for i in range(number):
+            for _ in range(number):
                 lists.append(Integers(memberx1, memberx2, membery1, membery2))
-            for y in range(number):
+            for _ in range(number):
                 #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
