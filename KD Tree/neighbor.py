@@ -9,7 +9,7 @@ def squared_distance(point_1, point_2):
     dims = len(point_1)
 
     for i in range(dims):
-        diff = abs(point_1[i] - point_2[i])
+        diff = point_1[i] - point_2[i]
         total += diff**2
 
     return total
