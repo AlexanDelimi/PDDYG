@@ -44,16 +44,15 @@ def csv_to_rects(csv_file):
         reader = csv.DictReader(csvfile)
         rects = []
         for row in reader:
-            x_min = float(row['x_min'])
-            x_max = float(row['x_max'])
-            y_min = float(row['y_min'])
-            y_max = float(row['y_max'])
             rects.append(
                 {
-                    'x_min': x_min,
-                    'x_max': x_max,
-                    'y_min': y_min,
-                    'y_max': y_max
+                    'x_min': float(row['x_min']),
+                    'x_max': float(row['x_max']),
+                    'y_min': float(row['y_min']),
+                    'y_max': float(row['y_max']),
+                    'npoints': float(row['npoints']),
+                    'x_distr': row['x_distr'],
+                    'y_distr': row['y_distr']
                 }
             )
     return rects

@@ -52,3 +52,4 @@ if __name__ == '__main__':
     plt.show()
 
     drs_to_csv('rect_test.csv', drs)
+    # drs_to_csv('rect_test_npoints.csv', drs)
