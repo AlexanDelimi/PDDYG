@@ -90,6 +90,12 @@ if __name__ == '__main__':
     main()
 
 
-# uniform and randint produce uniform distributions for real and integer numbers respectively
-# we need 2D Inverse Transform Sampling
-# https://medium.com/analytics-vidhya/generating-simulated-data-points-that-follow-a-give-probability-density-function-678a50b467fa
+# uniform() and randint() produce uniform distributions for real and integer numbers respectively
+# 
+# 2D Inverse Transform Sampling
+# https://medium.com/analytics-vidhya/generating-simulated-data-points-that-follow-a-give-probability-density-function-678a50b467fa 
+# 
+# give each rectangle a distribution per dimension
+# uniform and gaussian distributions as choices
+# use rectangles to approximate every distribution pattern
+# search for papers on the weaknesses of each tree
