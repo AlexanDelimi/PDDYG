@@ -40,8 +40,8 @@ if __name__ == '__main__':
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
 
+    # 2 lines bellow only when redrawing
     bars = csv_to_bars('rect_test.csv')
-
     drs = redraw_bars(bars, ax, drs)
 
     rs = RectangleSelector(ax, line_select_callback,

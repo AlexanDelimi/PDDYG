@@ -52,7 +52,8 @@ def csv_to_rects(csv_file):
                     'y_max': float(row['y_max']),
                     'npoints': float(row['npoints']),
                     'x_distr': row['x_distr'],
-                    'y_distr': row['y_distr']
+                    'y_distr': row['y_distr'],
+                    'mode': row['mode']
                 }
             )
     return rects

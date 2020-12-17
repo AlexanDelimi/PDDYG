@@ -1,6 +1,6 @@
 from rectangles_csv_handling import csv_to_rects
 import csv
-from random import uniform
+from random import uniform, triangular
 
 def rect_to_points(rect, csv_writer):
     
@@ -8,13 +8,15 @@ def rect_to_points(rect, csv_writer):
         
         if rect['x_distr'] == 'uniform':
             x = uniform(rect['x_min'], rect['x_max'])
-        elif rect['x_distr'] == 'normal':
-            pass
+        elif rect['x_distr'] == 'triangular':
+            mode = float(rect['mode']) if rect['mode'] != "-" else ( rect['x_min'] + rect['x_max'] ) / 2
+            x = triangular(rect['x_min'],rect['x_max'], mode)
         
         if rect['y_distr'] == 'uniform':
             y = uniform(rect['y_min'], rect['y_max'])
-        elif rect['y_distr'] == 'normal':
-            pass
+        elif rect['y_distr'] == 'triangular':
+            mode = float(rect['mode']) if rect['mode'] != "-" else ( rect['y_min'] + rect['y_max'] ) / 2
+            y = triangular(rect['y_min'],rect['y_max'], mode)
 
         csv_writer.writerow([x, y])
 
