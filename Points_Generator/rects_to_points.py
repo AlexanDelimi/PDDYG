@@ -9,14 +9,14 @@ def rect_to_points(rect, csv_writer):
         if rect['x_distr'] == 'uniform':
             x = uniform(rect['x_min'], rect['x_max'])
         elif rect['x_distr'] == 'triangular':
-            mode = float(rect['mode']) if rect['mode'] != "-" else ( rect['x_min'] + rect['x_max'] ) / 2
-            x = triangular(rect['x_min'],rect['x_max'], mode)
+            mode_x = float(rect['mode_x']) if rect['mode_x'] != "-" else ( rect['x_min'] + rect['x_max'] ) / 2
+            x = triangular(rect['x_min'],rect['x_max'], mode_x)
         
         if rect['y_distr'] == 'uniform':
             y = uniform(rect['y_min'], rect['y_max'])
         elif rect['y_distr'] == 'triangular':
-            mode = float(rect['mode']) if rect['mode'] != "-" else ( rect['y_min'] + rect['y_max'] ) / 2
-            y = triangular(rect['y_min'],rect['y_max'], mode)
+            mode_y = float(rect['mode_y']) if rect['mode_y'] != "-" else ( rect['y_min'] + rect['y_max'] ) / 2
+            y = triangular(rect['y_min'],rect['y_max'], mode_y)
 
         csv_writer.writerow([x, y])
 
