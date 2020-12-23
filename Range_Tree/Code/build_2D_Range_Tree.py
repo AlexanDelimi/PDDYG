@@ -1,5 +1,4 @@
 from pprint import pprint
-from operator import itemgetter
 
 
 class TreeLeaf():
@@ -26,8 +25,6 @@ class TreeNode():
                 self.left_child.point_list.append(point)
             elif not is_leaf(self.left_child):
                 self.left_child.insert_leaf(point, dim)
-            else:
-                print('something went wrong 1')
         else:
             if self.right_child is None:
                 self.right_child = TreeLeaf(point)
@@ -35,8 +32,6 @@ class TreeNode():
                 self.right_child.point_list.append(point)
             elif not is_leaf(self.right_child):
                 self.right_child.insert_leaf(point, dim)
-            else:
-                print('something went wrong 2')
 
     def to_dict(self):
 
@@ -47,20 +42,20 @@ class TreeNode():
             'bst y': None
         }
 
-        if self.left_child != None:
+        if self.left_child is not None:
             if is_leaf(self.left_child):
                 dictionary['left child'] = self.left_child.point_list
             else:
                 dictionary['left child'] = self.left_child.to_dict()
 
-        if self.right_child != None:
+        if self.right_child is not None:
             if is_leaf(self.right_child):
                 dictionary['right child'] = self.right_child.point_list
             else:
                 dictionary['right child'] = self.right_child.to_dict()
 
-        if self.bst_y != None:
-            dictionary['right child'] = self.bst_y.to_dict()
+        if self.bst_y is not None:
+            dictionary['bst y'] = self.bst_y.to_dict()
 
         return dictionary
 
@@ -72,7 +67,9 @@ def is_leaf(node):
         return False
 
 def build_1D_Range_Tree(nums):
-    '''nums must be a sorted list of unique values'''
+    '''
+    nums: sorted list of unique values
+    '''
     if not nums:
         return None
     mid_val = len(nums) // 2
@@ -82,31 +79,43 @@ def build_1D_Range_Tree(nums):
     return node
 
 def build_2D_Range_Tree(nums, lista):
-    ''' nums must be a sorted list of unique values '''
-    ''' lista must be a list of tuples
-        with x coordinate in range [min(nums), max(nums)] '''
-    if not nums:
-        return None
+    '''
+    nums: sorted list of unique values
 
-    mid_val = len(nums) // 2
-    node = TreeNode(nums[mid_val])
+    lista: list of tuples with x coordinate in range [min(nums), max(nums)]
+    '''
+    if not nums:                      
+        return None                       
 
-    left_lista = []
+    mid_val = len(nums) // 2             
+    node = TreeNode(nums[mid_val])       
+
+    left_lista = []             
+    # No need to check for adequate length of left half of nums,
+    # because it will always contain the last remaining element.
     for point in lista:
-        if nums[0] <= point[0] and point[0] <= nums[mid_val]:
+        # keep points in left half range 
+        if nums[0] <= point[0] and point[0] <= nums[mid_val]:   
             left_lista.append(point)
-    node.left_child = build_2D_Range_Tree(nums[:mid_val], left_lista)
+    # same as 1D build
+    node.left_child = build_2D_Range_Tree(nums[:mid_val], left_lista)   
 
     right_lista = []
-    if mid_val+1 < len(nums):
+    # We have to check for adequate length of right half of nums,
+    # because it might not contain any elements.
+    if mid_val+1 < len(nums):    
         for point in lista:
+            # keep points in left half range
             if nums[mid_val+1] <= point[0] and point[0]<= nums[-1]:
                 right_lista.append(point)
-    node.right_child = build_2D_Range_Tree(nums[mid_val + 1:], right_lista)
+    # same as 1D build
+    node.right_child = build_2D_Range_Tree(nums[mid_val + 1:], right_lista) 
     
-    list_y = sorted(list(set([point[1] for point in lista])))
-    node.bst_y = build_1D_Range_Tree(list_y)
-    '''node.bst_y.insert_leaves(lista, 1)'''
+    # Build the range tree of the second dimension
+    # using the points passed down from the parent node.
+    list_y = sorted(list(set([point[1] for point in lista])))        
+    node.bst_y = build_1D_Range_Tree(list_y)                         
+    node.bst_y.insert_leaves(lista, 1)                               
 
     return node
 
