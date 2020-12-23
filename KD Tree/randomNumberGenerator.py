@@ -3,27 +3,26 @@ import csv
 
 class Coordinates:
     def __init__(self):
-        self.longitude =uniform(-180, 180)
-        self.latitude =  uniform(-90, 90)
+        self.longitude = uniform(-180, 180)
+        self.latitude = uniform(-90, 90)
 
     def print(self):
-        print("Longitude = ",self.longitude, ", Latitude = ",self.latitude)
+        print("Longitude = ", self.longitude, ", Latitude = ", self.latitude)
 
 
-class Tuples:
-    def __init__(self,boundx1,boundx2,boundy1,boundy2):
+class Floats:
+    def __init__(self, boundx1, boundx2, boundy1, boundy2):
         self.longitude = uniform(boundx1, boundx2)
         self.latitude = uniform(boundy1, boundy2)
 
 
 class Integers:
-    def __init__(self,boundx1,boundx2,boundy1,boundy2):
+    def __init__(self, boundx1, boundx2, boundy1, boundy2):
         self.longitude = randint(boundx1, boundx2)
         self.latitude = randint(boundy1, boundy2)
 
 
-def printcsv (lists, filename):
-
+def printcsv(lists, filename):
         with open(filename, newline='', mode='w') as csvfile:
             csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             for x in lists:
@@ -40,7 +39,6 @@ def main():
     if mode == "1":
         number = input('Give me how many coordinates you want')
         filename = "_coordinates.csv"
-        # number=5
         try:
             filename = number + filename
             number = int(number)
@@ -48,7 +46,6 @@ def main():
             for i in range(number):
                 lists.append(Coordinates())
             for y in range(number):
-                #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
             print("Invalid number")
@@ -68,9 +65,8 @@ def main():
             membery1 = int(membery1)
             lists = []
             for i in range(number):
-                lists.append(Tuples(memberx1, memberx2, membery1, membery2))
+                lists.append(Floats(memberx1, memberx2, membery1, membery2))
             for y in range(number):
-                #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
             print("Invalid number")
@@ -92,7 +88,6 @@ def main():
             for i in range(number):
                 lists.append(Integers(memberx1, memberx2, membery1, membery2))
             for y in range(number):
-                #lists.__getitem__(y).print()
                 printcsv(lists, filename)
         except ValueError:
             print("Invalid number")
