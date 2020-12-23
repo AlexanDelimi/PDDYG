@@ -28,18 +28,18 @@ class Node:
 
 
 class QTree:
-    def __init__(self, k, lista):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
+    def __init__(self, k, lists):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
         self.threshold = k
-        self.points = []
-        self.addManyPoints(lista)
-        self.root = Node(0, 0, self.width(lista), self.height(lista), points)
+        self.points = lists
+        #self.addManyPoints(lista)
+        self.root = Node(0, 0, 10, 10, self.points)
 
     def add_point(self, x, y):
         self.points.append(Point(x, y))
 
-    def addManyPoints(self, lista):
-        for point in lista:
-            self.add_point(point[0], point[1])
+    #def addManyPoints(self, lista):
+        #for point in lista:
+            #self.add_point(point[0], point[1])
 
     def get_points(self):
         return self.points
@@ -47,39 +47,21 @@ class QTree:
     def subdivide(self):
         recursive_subdivide(self.root, self.threshold)
 
-    def graph(self):
-        fig = plt.figure(figsize=(12, 8))
-        plt.title("Quadtree")
-        ax = fig.add_subplot(111)
-        c = find_children(self.root)
-        print()
-        "Number of segments: %d" % len(c)
-        areas = set()
-        for el in c:
-            areas.add(el.width * el.height)
-        print()
-        "Minimum segment area: %.3f units" % min(areas)
-        for n in c:
-            ax.add_patch(patches.Rectangle((n.x0, n.y0), n.width, n.height, fill=False))
-        x = [point.x for point in self.points]
-        y = [point.y for point in self.points]
-        plt.plot(x, y, 'ro')
-        plt.show()
-        return
 
-    def height(self, lista):
-        first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
-        first_x = first_and_second[0][0]
-        last_x = first_and_second[-1][0]
-        height = abs(first_x) + abs(last_x)
-        return height
 
-    def width(self, lista):
-        first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
-        first_y = first_and_second[0][1]
-        last_y = first_and_second[-1][1]
-        width = abs(first_y) + abs(last_y)
-        return width
+   #def height(self, lista):
+   #    first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
+   #    first_x = first_and_second[0][0]
+   #    last_x = first_and_second[-1][0]
+   #    height = abs(first_x) + abs(last_x)
+   #    return height
+   #
+   #def width(self, lista):
+   #    first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
+   #    first_y = first_and_second[0][1]
+   #    last_y = first_and_second[-1][1]
+   #    width = abs(first_y) + abs(last_y)
+   #    return width
 
 
 def recursive_subdivide(node, k):
@@ -111,7 +93,7 @@ def recursive_subdivide(node, k):
 def contains(x, y, w, h, points):
     pts = []
     for point in points:
-        if point[0] < x or point[0] > x + w or point[1] < y or point[1] > y + h:
+        if point.x< x or point.x > x + w or point.y < y or point.y> y + h:
             continue
         pts.append(point)
     return pts
@@ -126,12 +108,31 @@ def find_children(node):
             children += (find_children(child))
     return children
 
+def graph(root):
+        fig = plt.figure(figsize=(15, 8))
+        plt.title("Quadtree")
+        ax = fig.add_subplot(111)
+        c = find_children(root)
+        print()
+        "Number of segments: %d" % len(c)
+        areas = set()
+        for el in c:
+            areas.add(el.x * el.y)
+        print()
+        "Minimum segment area: %.3f units" % min(areas)
+        for n in c:
+            ax.add_patch(patches.Rectangle((n.x, n.y), n.width, n.height, fill=False))
+        x = [point.x for point in root.points]
+        y = [point.y for point in root.points]
+        plt.plot(x, y, 'ro')
+        plt.show()
+        return
 
-points = [(-3, 1), (-5, 3), (-2, 4), (0, 0), (1, 1), (4, 1), (2, 3)]
+data = [(-3, 1), (-5, 3), (-2, 4), (0, 0), (1, 1), (4, 1), (2, 3)]
 
+points=  [Point(data.__getitem__(x)[0], data.__getitem__(x)[1]) for x in range(len(data))]
 # height_width(points)
-qtree = QTree(3, points)
-qtree.subdivide()
-qtree.graph()
-print(qtree.height(points))
-print(qtree.width(points))
+qtree = QTree(6, points)
+#qtree.subdivide()
+#qtree.graph(qtree.root)
+
