@@ -121,8 +121,8 @@ def build_2D_Range_Tree(nums, lista):
 
 
 def main():
-    # lista = [(6,3), (2,6), (-2,4), (10,9), (3,1), (8,0), (8,10), (2,5), (12,-2)]
-    lista = [(1,2), (2,3), (3,1)]
+    lista = [(6,3), (2,6), (-2,4), (10,9), (3,1), (8,0), (8,10), (2,5), (12,-2), (3,5)]
+    # lista = [(1,2), (2,3), (2,4), (3,1)]
     
     list_x = sorted(list(set([point[0] for point in lista])))
     root = build_2D_Range_Tree(list_x, lista)
