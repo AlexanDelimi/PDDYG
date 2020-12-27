@@ -41,9 +41,9 @@ def closest_point(temp_best, best_point, target_point):
         return best_point
 
 
-def nearest_neighbor_x(root, target_point, axis, nearest_list):
+def nearest_neighbor_x(root, target_point, nearest_list):
     ''' Get the point nearest to target
-        according to the axis dimension
+        according to the x dimension
         that is not already reported in nearest_list. '''
     
     if root is None:
@@ -56,8 +56,8 @@ def nearest_neighbor_x(root, target_point, axis, nearest_list):
         nextBranch = None
         otherBranch = None
 
-        # compare the coordinate for the given axis
-        if target_point[axis] < root.value:
+        # compare the coordinate for the x axis
+        if target_point[0] < root.value:
             nextBranch = root.left_child
             otherBranch = root.right_child
         else:
@@ -66,13 +66,13 @@ def nearest_neighbor_x(root, target_point, axis, nearest_list):
 
         if is_leaf(nextBranch):
             # search for best point in y bst
-            best_point = nearest_neighbor_y(root.bst_y, target_point, 1, nearest_list)
+            best_point = nearest_neighbor_y(root.bst_y, target_point, nearest_list)
         else:
             # recurse down the best branch
-            best_point = nearest_neighbor_x(nextBranch, target_point, axis, nearest_list)
+            best_point = nearest_neighbor_x(nextBranch, target_point, nearest_list)
 
         squared_radius = squared_distance(target_point, best_point)
-        absolute_distance = abs(target_point[axis] - root.value)
+        absolute_distance = abs(target_point[0] - root.value)
 
         # check if the other branch is closer
         if squared_radius >= absolute_distance**2:
@@ -80,19 +80,19 @@ def nearest_neighbor_x(root, target_point, axis, nearest_list):
             temp_best = None
             if is_leaf(otherBranch):
                 # search for best point in y bst
-                temp_best = nearest_neighbor_y(root.bst_y, target_point, 1, nearest_list)
+                temp_best = nearest_neighbor_y(root.bst_y, target_point, nearest_list)
             else:
                 # recurse down the other branch
-                temp_best = nearest_neighbor_x(otherBranch, target_point, axis, nearest_list)
+                temp_best = nearest_neighbor_x(otherBranch, target_point, nearest_list)
             
             best_point = closest_point(temp_best, best_point, target_point)
 
         return best_point
 
 
-def nearest_neighbor_y(root, target_point, axis, nearest_list):
+def nearest_neighbor_y(root, target_point, nearest_list):
     ''' Get the point nearest to target
-        according to the axis dimension
+        according to the y dimension
         that is not already reported in nearest_list. '''
     
     if root is None:
@@ -119,8 +119,8 @@ def nearest_neighbor_y(root, target_point, axis, nearest_list):
         nextBranch = None
         otherBranch = None
 
-        # compare the coordinate for the given axis
-        if target_point[axis] < root.value:
+        # compare the coordinate for the y axis
+        if target_point[1] < root.value:
             nextBranch = root.left_child
             otherBranch = root.right_child
         else:
@@ -128,14 +128,14 @@ def nearest_neighbor_y(root, target_point, axis, nearest_list):
             otherBranch = root.left_child
 
         # recurse down the best branch
-        best_point = nearest_neighbor_y(nextBranch, target_point, axis, nearest_list)
+        best_point = nearest_neighbor_y(nextBranch, target_point, nearest_list)
 
         squared_radius = squared_distance(target_point, best_point)
-        absolute_distance = abs(target_point[axis] - root.value)
+        absolute_distance = abs(target_point[1] - root.value)
 
         # check if the other branch is closer
         if squared_radius >= absolute_distance**2:
-            temp_best = nearest_neighbor_y(otherBranch, target_point, axis, nearest_list)
+            temp_best = nearest_neighbor_y(otherBranch, target_point, nearest_list)
             best_point = closest_point(temp_best, best_point, target_point)
 
         return best_point
@@ -155,7 +155,7 @@ def k_nn(root, target_point, num_points, k):
     else:
         nearest_list = []
         while (len(nearest_list) < k) and (len(nearest_list) < num_points):
-            nn = nearest_neighbor_x(root, target_point, 0, nearest_list)
+            nn = nearest_neighbor_x(root, target_point, nearest_list)
             nearest_list.append(nn)
             print(nearest_list)
         return nearest_list
@@ -168,15 +168,11 @@ def main():
     plt.scatter(*zip(*lista))
 
     # build 2D range tree
-    list_x = sorted(list(set([point[0] for point in lista])))
-    root = build_2D_Range_Tree(list_x, lista)
-    root.insert_leaves(lista, 0)
-
-    # pprint(root.to_dict())
+    root = build_2D_Range_Tree(lista)
 
     # perform knn query around target
-    target_point = (4.5,5)
-    knn = k_nn(root, target_point, num_points=len(lista), k=5)
+    target_point = (2,5)
+    knn = k_nn(root, target_point, num_points=len(lista), k=10)
     
     # draw target, neighbors and enclosing circle
     plt.scatter(target_point[0], target_point[1], color='black', marker='D')
