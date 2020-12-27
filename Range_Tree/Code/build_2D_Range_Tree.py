@@ -33,6 +33,26 @@ class TreeNode():
             elif not is_leaf(self.right_child):
                 self.right_child.insert_leaf(point, dim)
 
+    def insert_bst_y(self, lista):
+
+        list_y = sorted(list(set([point[1] for point in lista])))
+        self.bst_y = build_1D_Range_Tree(list_y)
+        self.bst_y.insert_leaves(lista, 1)
+
+        left_lista = []
+        right_lista = []
+        for point in lista:
+            if point[0] <= self.value:
+                left_lista.append(point)
+            else:
+                right_lista.append(point)
+        
+        if not ( is_leaf(self.left_child) or self.left_child is None ):
+            self.left_child.insert_bst_y(left_lista)
+        
+        if not ( is_leaf(self.right_child) or self.right_child is None ):
+            self.right_child.insert_bst_y(right_lista)
+
     def to_dict(self):
 
         dictionary = {
@@ -78,55 +98,22 @@ def build_1D_Range_Tree(nums):
     node.right_child = build_1D_Range_Tree(nums[mid_val + 1:])
     return node
 
-def build_2D_Range_Tree(nums, lista):
-    '''
-    nums: sorted list of unique values
+def build_2D_Range_Tree(lista):
 
-    lista: list of tuples with x coordinate in range [min(nums), max(nums)]
-    '''
-    if not nums:                      
-        return None                       
+    list_x = sorted(list(set([point[0] for point in lista])))
+    root = build_1D_Range_Tree(list_x)
+    root.insert_leaves(lista, 0)
 
-    mid_val = len(nums) // 2             
-    node = TreeNode(nums[mid_val])       
+    root.insert_bst_y(lista)              
 
-    left_lista = []             
-    # No need to check for adequate length of left half of nums,
-    # because it will always contain the last remaining element.
-    for point in lista:
-        # keep points in left half range 
-        if nums[0] <= point[0] and point[0] <= nums[mid_val]:   
-            left_lista.append(point)
-    # same as 1D build
-    node.left_child = build_2D_Range_Tree(nums[:mid_val], left_lista)   
-
-    right_lista = []
-    # We have to check for adequate length of right half of nums,
-    # because it might not contain any elements.
-    if mid_val+1 < len(nums):    
-        for point in lista:
-            # keep points in left half range
-            if nums[mid_val+1] <= point[0] and point[0]<= nums[-1]:
-                right_lista.append(point)
-    # same as 1D build
-    node.right_child = build_2D_Range_Tree(nums[mid_val + 1:], right_lista) 
-    
-    # Build the range tree of the second dimension
-    # using the points passed down from the parent node.
-    list_y = sorted(list(set([point[1] for point in lista])))        
-    node.bst_y = build_1D_Range_Tree(list_y)                         
-    node.bst_y.insert_leaves(lista, 1)                               
-
-    return node
+    return root
 
 
 def main():
     lista = [(6,3), (2,6), (-2,4), (10,9), (3,1), (8,0), (8,10), (2,5), (12,-2), (3,5)]
     # lista = [(1,2), (2,3), (2,4), (3,1)]
     
-    list_x = sorted(list(set([point[0] for point in lista])))
-    root = build_2D_Range_Tree(list_x, lista)
-    root.insert_leaves(lista, 0)
+    root = build_2D_Range_Tree(lista)
 
     pprint(root.to_dict())
 
