@@ -18,7 +18,7 @@ class Node:
         self.southeast = southeast
         self.southwest = southwest
         self.points = points
-        self.children = []
+        #self.children = []
         points.sort(key=lambda tup: tup[0])
         self.width = (points[0][0] + points[-1][0])
         points.sort(key=lambda tup: tup[1])
@@ -35,7 +35,7 @@ class Node:
 
 class QuadTree:
     def __init__(self, k, lists):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
-        self.threshold = 5
+        self.threshold = k
         self.points = lists
         self.root = Node(0, 0, None, None, None, None, self.points)
 

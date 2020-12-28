@@ -1,51 +1,77 @@
+from random import uniform
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 
-class Point:
-    def __init__(self, x, y):
+class Node:
+    def __init__(self, x, y, w, h):
         self.x = x
         self.y = y
-
-
-class Node:
-    def __init__(self, x0, y0, w, h, points):
-        self.x0 = x0
-        self.y0 = y0
         self.width = w
         self.height = h
-        self.points = points
-        self.children = []
+        self.children = {}
 
-    def get_width(self):
-        return self.width
+    def contains(self, points):
+        pts = []
+        for point in points:
+            if self.x <= point[0] < self.x + self.width and self.y <= point[1] < self.y + self.height:
+                pts.append(point)
+        return pts
 
-    def get_height(self):
-        return self.height
+    def subdivide(self, k, points):
+        if len(points) <= k:
+            self.children = points
+            return
 
-    def get_points(self):
-        return self.points
+        w_ = float(self.width / 2)
+        h_ = float(self.height / 2)
 
+        self.children['southwest'] = Node(self.x, self.y, w_, h_)
+        p = self.children['southwest'].contains(points)
+        self.children['southwest'].subdivide(k, p)
+
+        self.children['southeast'] = Node(self.x+w_, self.y, w_, h_)
+        p = self.children['southeast'].contains(points)
+        self.children['southeast'].subdivide(k, p)
+
+        self.children['northwest'] = Node(self.x, self.y+h_, w_, h_)
+        p = self.children['northwest'].contains(points)
+        self.children['northwest'].subdivide(k, p)
+
+        self.children['northeast'] = Node(self.x+w_, self.y+h_, w_, h_)
+        p = self.children['northeast'].contains(points)
+        self.children['northeast'].subdivide(k, p)
+
+    def find_children(self, nodelist, leaflist):
+        if self.children.__class__.__name__ == "list":
+            nodelist.append(self)
+            leaflist += self.children
+        elif self.children.__class__.__name__ == "dict":
+            for child in self.children:
+                nodelist = self.children[child].find_children(nodelist, leaflist)
+        return nodelist, leaflist
 
 class QTree:
-    def __init__(self, k, lists):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί και n είναι ο αριθμός των σημείων
+    def __init__(self, k, xmin, ymin, width, height):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί
         self.threshold = k
-        self.points = lists
-        #self.addManyPoints(lista)
-        self.root = Node(0, 0, 10, 10, self.points)
+        self.root = Node(xmin-0.01, ymin-0.01, width+0.02, height+0.02)
 
-    def add_point(self, x, y):
-        self.points.append(Point(x, y))
+    def add_points(self, points):
+        self.root.subdivide(self.threshold, points)
 
-    #def addManyPoints(self, lista):
-        #for point in lista:
-            #self.add_point(point[0], point[1])
+    def graph(self):
+        fig = plt.figure(figsize=(15, 8))
+        plt.title("Quadtree")
+        ax = fig.add_subplot(111)
+        children, leaves = self.root.find_children([], [])
+        for node in children:
+            ax.add_patch(patches.Rectangle((node.x, node.y), node.width, node.height, fill=False))
+        plt.scatter(*zip(*leaves))
+        plt.show()
+        return
 
-    def get_points(self):
-        return self.points
 
-    def subdivide(self):
-        recursive_subdivide(self.root, self.threshold)
 
 
 
@@ -64,75 +90,17 @@ class QTree:
    #    return width
 
 
-def recursive_subdivide(node, k):
-    if len(node.points) <= k:
-        return
-
-    w_ = float(node.width / 2)
-    h_ = float(node.height / 2)
-
-    p = contains(node.x0, node.y0, w_, h_, node.points)
-    x1 = Node(node.x0, node.y0, w_, h_, p)
-    recursive_subdivide(x1, k)
-
-    p = contains(node.x0, node.y0 + h_, w_, h_, node.points)
-    x2 = Node(node.x0, node.y0 + h_, w_, h_, p)
-    recursive_subdivide(x2, k)
-
-    p = contains(node.x0 + w_, node.y0, w_, h_, node.points)
-    x3 = Node(node.x0 + w_, node.y0, w_, h_, p)
-    recursive_subdivide(x3, k)
-
-    p = contains(node.x0 + w_, node.y0 + h_, w_, h_, node.points)
-    x4 = Node(node.x0 + w_, node.y0 + h_, w_, h_, p)
-    recursive_subdivide(x4, k)
-
-    node.children = [x1, x2, x3, x4]
 
 
-def contains(x, y, w, h, points):
-    pts = []
-    for point in points:
-        if point.x< x or point.x > x + w or point.y < y or point.y> y + h:
-            continue
-        pts.append(point)
-    return pts
 
-
-def find_children(node):
-    if not node.children:
-        return [node]
-    else:
-        children = []
-        for child in node.children:
-            children += (find_children(child))
-    return children
-
-def graph(root):
-        fig = plt.figure(figsize=(15, 8))
-        plt.title("Quadtree")
-        ax = fig.add_subplot(111)
-        c = find_children(root)
-        print()
-        "Number of segments: %d" % len(c)
-        areas = set()
-        for el in c:
-            areas.add(el.x * el.y)
-        print()
-        "Minimum segment area: %.3f units" % min(areas)
-        for n in c:
-            ax.add_patch(patches.Rectangle((n.x, n.y), n.width, n.height, fill=False))
-        x = [point.x for point in root.points]
-        y = [point.y for point in root.points]
-        plt.plot(x, y, 'ro')
-        plt.show()
-        return
 
 data = [(-3, 1), (-5, 3), (-2, 4), (0, 0), (1, 1), (4, 1), (2, 3)]
 
-points=  [Point(data.__getitem__(x)[0], data.__getitem__(x)[1]) for x in range(len(data))]
+#points=  [Point(data.__getitem__(x)[0], data.__getitem__(x)[1]) for x in range(len(data))]
 # height_width(points)
 qtree = QTree(6, points)
 #qtree.subdivide()
 #qtree.graph(qtree.root)
 
+def main():
+    points = [(uniform(0, 100), uniform(0, 100)) for _ in range(10)]
