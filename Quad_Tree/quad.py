@@ -1,3 +1,4 @@
+from operator import itemgetter
 from random import uniform
 
 import matplotlib.pyplot as plt
@@ -49,15 +50,20 @@ class Node:
             leaflist += self.children
         elif self.children.__class__.__name__ == "dict":
             for child in self.children:
-                nodelist = self.children[child].find_children(nodelist, leaflist)
+                nodelist, leaflist = self.children[child].find_children(nodelist, leaflist)
         return nodelist, leaflist
 
-class QTree:
-    def __init__(self, k, xmin, ymin, width, height):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί
-        self.threshold = k
-        self.root = Node(xmin-0.01, ymin-0.01, width+0.02, height+0.02)
 
-    def add_points(self, points):
+class QTree:
+    def __init__(self, k, points):  # k ο μέγιστος αριθμός σημείων σε κάθε κουτί
+        self.threshold = k
+        xmin = min(points, key=itemgetter(0))[0]
+        ymin = min(points, key=itemgetter(1))[1]
+        xmax = max(points, key=itemgetter(0))[0]
+        ymax = max(points, key=itemgetter(1))[1]
+        width = xmax - xmin
+        height = ymax - ymin
+        self.root = Node(xmin - 0.01, ymin - 0.01, width + 0.02, height + 0.02)
         self.root.subdivide(self.threshold, points)
 
     def graph(self):
@@ -65,6 +71,7 @@ class QTree:
         plt.title("Quadtree")
         ax = fig.add_subplot(111)
         children, leaves = self.root.find_children([], [])
+        print(len(leaves))
         for node in children:
             ax.add_patch(patches.Rectangle((node.x, node.y), node.width, node.height, fill=False))
         plt.scatter(*zip(*leaves))
@@ -72,35 +79,10 @@ class QTree:
         return
 
 
-
-
-
-   #def height(self, lista):
-   #    first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
-   #    first_x = first_and_second[0][0]
-   #    last_x = first_and_second[-1][0]
-   #    height = abs(first_x) + abs(last_x)
-   #    return height
-   #
-   #def width(self, lista):
-   #    first_and_second = sorted(points, key=lambda tup: (tup[0], tup[1]))
-   #    first_y = first_and_second[0][1]
-   #    last_y = first_and_second[-1][1]
-   #    width = abs(first_y) + abs(last_y)
-   #    return width
-
-
-
-
-
-
-data = [(-3, 1), (-5, 3), (-2, 4), (0, 0), (1, 1), (4, 1), (2, 3)]
-
-#points=  [Point(data.__getitem__(x)[0], data.__getitem__(x)[1]) for x in range(len(data))]
-# height_width(points)
-qtree = QTree(6, points)
-#qtree.subdivide()
-#qtree.graph(qtree.root)
-
 def main():
-    points = [(uniform(0, 100), uniform(0, 100)) for _ in range(10)]
+    points = [(uniform(0, 100), uniform(0, 100)) for _ in range(100)]
+    qtree=QTree(3, points)
+    qtree.graph()
+
+if __name__=='__main__':
+    main()
