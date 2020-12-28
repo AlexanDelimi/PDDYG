@@ -28,21 +28,21 @@ class Node:
         w_ = float(self.width / 2)
         h_ = float(self.height / 2)
 
-        self.children['southwest'] = Node(self.x, self.y, w_, h_)
-        p = self.children['southwest'].contains(points)
-        self.children['southwest'].subdivide(k, p)
+        self.children['sw'] = Node(self.x, self.y, w_, h_)
+        p = self.children['sw'].contains(points)
+        self.children['sw'].subdivide(k, p)
 
-        self.children['southeast'] = Node(self.x+w_, self.y, w_, h_)
-        p = self.children['southeast'].contains(points)
-        self.children['southeast'].subdivide(k, p)
+        self.children['se'] = Node(self.x+w_, self.y, w_, h_)
+        p = self.children['se'].contains(points)
+        self.children['se'].subdivide(k, p)
 
-        self.children['northwest'] = Node(self.x, self.y+h_, w_, h_)
-        p = self.children['northwest'].contains(points)
-        self.children['northwest'].subdivide(k, p)
+        self.children['nw'] = Node(self.x, self.y+h_, w_, h_)
+        p = self.children['nw'].contains(points)
+        self.children['nw'].subdivide(k, p)
 
-        self.children['northeast'] = Node(self.x+w_, self.y+h_, w_, h_)
-        p = self.children['northeast'].contains(points)
-        self.children['northeast'].subdivide(k, p)
+        self.children['ne'] = Node(self.x+w_, self.y+h_, w_, h_)
+        p = self.children['ne'].contains(points)
+        self.children['ne'].subdivide(k, p)
 
     def find_children(self, nodelist, leaflist):
         if self.children.__class__.__name__ == "list":
@@ -68,15 +68,13 @@ class QTree:
 
     def graph(self):
         fig = plt.figure(figsize=(15, 8))
-        plt.title("Quadtree")
         ax = fig.add_subplot(111)
+        plt.title("Quadtree")
         children, leaves = self.root.find_children([], [])
-        print(len(leaves))
         for node in children:
             ax.add_patch(patches.Rectangle((node.x, node.y), node.width, node.height, fill=False))
         plt.scatter(*zip(*leaves))
-        plt.show()
-        return
+        # plt.show()
 
 
 def main():
