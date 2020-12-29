@@ -48,6 +48,8 @@ def distribution_to_points(csv_name, set_number):
 
 if __name__ == '__main__':
 
+    os.chdir('./New_Generator')
+    
     root = tk.Tk() 
     root.withdraw()
 

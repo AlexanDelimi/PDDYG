@@ -1,3 +1,4 @@
+import os
 import csv
 import tkinter as tk
 import matplotlib.pyplot as plt
@@ -11,6 +12,8 @@ def points_csv_to_list_of_tuples(csv_file):
 
 
 if __name__ == '__main__':
+
+    os.chdir('./New_Generator')
 
     root = tk.Tk() 
     root.withdraw()

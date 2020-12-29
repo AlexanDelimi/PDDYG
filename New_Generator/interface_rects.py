@@ -5,6 +5,8 @@ from tkinter import simpledialog, messagebox, filedialog
 
 from draw_rectangles import open_interface
 
+os.chdir('./New_Generator')
+
 root = tk.Tk() 
 root.withdraw()
 
