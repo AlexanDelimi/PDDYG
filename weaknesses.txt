@@ -1,0 +1,46 @@
+Kd Tree
+    
+    https://en.wikipedia.org/wiki/K-d_tree
+        
+        ~ Degradation in performance when the query point is far from points in the k-d tree
+        
+        Additionally, even in low-dimensional space, if the average pairwise distance between the k nearest neighbors of the query point is significantly less than the average distance between the query point and each of the k nearest neighbors, the performance of nearest neighbor search degrades towards linear, since the distances from the query point to each nearest neighbor are of similar magnitude.
+
+
+Quad Tree
+
+    https://dl.acm.org/doi/abs/10.1145/564691.564755
+
+    ~ Abstract
+
+    In this paper, we first describe briefly our implementation of Quadtree and R-tree index structures and related optimizations in Oracle Spatial. We then examine the relative merits of two structures as implemented in Oracle Spatial and compare their performance for different types of queries and other operations.
+
+    \-> https://dl.acm.org/doi/pdf/10.1145/564691.564755
+
+        ~ 3.1 Quadtree as the Primary Filter
+
+        In spite of these advantages, Quadtree has one drawback: the need to choose an appropriate tiling level for tesseluting the data and query geometries. Much experimentation with different levels is needed in order to optimize performance for a specific dataset.
+
+
+Range Tree
+
+    https://en.wikipedia.org/wiki/Range_tree
+
+    ~ Data structure
+
+    A range tree on a set of points in d-dimensions is a recursively defined multi-level binary search tree. Each level of the data structure is a binary search tree on one of the d-dimensions.
+
+    \-> https://www.interviewcake.com/concept/java/binary-search-tree
+
+        ~ Weaknesses
+
+        Poor performance if unbalanced. Some types of binary search trees balance automatically, but not all. If a BST is not balanced, then operations become O(n).
+
+
+Συμπεράσματα
+
+    1. Το Range Tree μας είναι πάντα balanced, οπότε το μειονέκτημά του εξαλείφεται.
+
+    2. Η αδυναμία του Quad Tree είανι μια απλή δυσκολία. Η επιλογή του threshold θα γίνει πειραματικά πριν την σύγκριση με τα άλλα δύο δέντρα, ώστε κατά την σύγκριση να είναι όλα τα δέντρα στην πιο αποδοτική μορφή τους. Ιδανικό θα ήταν μια συνάρτηση με είσοδο το πλήθος των σημείων και έξοδο το threshold. Μερικές ιδέες για αυτή τη συνάρτηση είναι: log(x), (log(x))^2, sqrt(sqrt(x)). Διαφορετικά, θα μπορούσε να βρεθεί μία γραμμική συνάρτηση.
+
+    3. Η αδυναμία του Κd Tree πρέπει να ερευνηθεί ως πιθανή αδυναμία και για τα άλλα δύο δέντρα. Κατά την σύγκριση των δέντρων θα πρέπει να γίνουν μετρήσεις και για απομακρισμένα target points.
