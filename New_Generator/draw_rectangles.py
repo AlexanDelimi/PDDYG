@@ -35,9 +35,9 @@ def handle_close(event):
 
     if len(drs) > 0:
         # save rectangles png at close event
-        plt.savefig('./Distributions/PNGs/' + file + '.png')
+        plt.savefig('./New_Generator/Distributions/PNGs/' + file + '.png')
         # save rectangles in drs to distribution csv file at close event
-        drs_to_csv('./Distributions/CSVs/' + file + '.csv', drs)
+        drs_to_csv('./New_Generator/Distributions/CSVs/' + file + '.csv', drs)
 
 
 def open_interface(filename, edit):
@@ -54,7 +54,7 @@ def open_interface(filename, edit):
 
     # load rectangles to edit
     if edit == True:
-        bars = csv_to_bars('./Distributions/CSVs/' + filename + '.csv')
+        bars = csv_to_bars('./New_Generator/Distributions/CSVs/' + filename + '.csv')
         drs = redraw_bars(bars, ax, drs)
 
     # prepare Rectangle Selector

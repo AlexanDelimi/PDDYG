@@ -7,7 +7,7 @@ from tkinter import simpledialog, messagebox, filedialog
 
 
 def csv_to_rects(csv_name):
-    with open('./Distributions/CSVs/' + csv_name +'.csv', newline='') as csvfile:
+    with open('./New_Generator/Distributions/CSVs/' + csv_name +'.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         total_area = 0
         rects = []
@@ -27,7 +27,7 @@ def csv_to_rects(csv_name):
 def distribution_to_points(csv_name, set_number):
 
     # create new points csv file
-    with open('./Datasets/set_' + str(set_number) + '/' + csv_name + '.csv' , newline='', mode='w') as datafile:
+    with open('./New_Generator/Datasets/set_' + str(set_number) + '/' + csv_name + '.csv' , newline='', mode='w') as datafile:
         data_writer = csv.writer(datafile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
         # retrive rectangles
@@ -47,8 +47,6 @@ def distribution_to_points(csv_name, set_number):
 
 
 if __name__ == '__main__':
-
-    os.chdir('./New_Generator')
     
     root = tk.Tk() 
     root.withdraw()
@@ -58,7 +56,7 @@ if __name__ == '__main__':
     if create_sets == 'yes':
     
         # open directory dialog to get the distribution csv files
-        filepaths = list(filedialog.askopenfilenames(initialdir='./Distributions/CSVs'))
+        filepaths = list(filedialog.askopenfilenames(initialdir='./New_Generator/Distributions/CSVs'))
         
         for path in filepaths:
             if 'Distributions' in path:
@@ -77,7 +75,7 @@ if __name__ == '__main__':
         if delete_sets == 'yes':
 
             # open directory dialog to get the distribution csv files
-            filepaths = list(filedialog.askopenfilenames(initialdir='./Distributions/CSVs'))
+            filepaths = list(filedialog.askopenfilenames(initialdir='./New_Generator/Distributions/CSVs'))
             
             for path in filepaths:
                     if 'Distributions' in path:

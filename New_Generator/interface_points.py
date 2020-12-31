@@ -13,13 +13,11 @@ def points_csv_to_list_of_tuples(csv_file):
 
 if __name__ == '__main__':
 
-    os.chdir('./New_Generator')
-
     root = tk.Tk() 
     root.withdraw()
 
     # open directory dialog to get the dataset csv file
-    filepath = filedialog.askopenfilename(initialdir='./Datasets')
+    filepath = filedialog.askopenfilename(initialdir='./New_Generator/Datasets')
 
     #convert points from csv to list of tuples
     list_of_tuples = points_csv_to_list_of_tuples(filepath)
