@@ -124,6 +124,6 @@ def and_go(file):
 
 
 if __name__=='__main__':
-    file = 'times_5.json'
+    file = './Quad_Tree_copy/times_5.json'
     # get_ready(file)
     # and_go(file)
