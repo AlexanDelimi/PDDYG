@@ -29,8 +29,20 @@ https://personal.us.es/almar/cg/09quadtrees.pdf - διαφάνεια 20
 
 simplified:             log2(sqrt(2)*s/d) + d = log4(n)
 
-over-simplified:        log2(1/d) + d = log2(n) 
+                        log2(sqrt(2)*s) + log2(1/d) + d = log2(n) / log2(4)
+                              V                                       V
+                            φεύγει                                  φεύγει
 
-                        1/d + 2**d = n
+over-simplified:        log2(1/d) + d = log2(n)
 
-over-over-simplified:   d = log2(n)
+                        2^( log2(1/d) + d ) = 2^log2(n)
+
+                        2^log2(1/d) * 2^d = n
+
+                        1/d * 2^d = n
+                         V
+                       φεύγει
+
+over-over-simplified:   2^d = n
+
+                        d = log2(n)
