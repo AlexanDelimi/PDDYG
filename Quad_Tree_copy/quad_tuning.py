@@ -122,8 +122,17 @@ def and_go(file):
         
         plt.show()
 
+def new_one():
+    from math import log
+    
+    for i in range(1,10):
+        print( 'n=10^' + str(i) + '\td=' + str(log(10**i,4)) )
+
 
 if __name__=='__main__':
-    file = './Quad_Tree_copy/times_5.json'
+    
+    # file = './Quad_Tree_copy/times_5.json'
     # get_ready(file)
     # and_go(file)
+    
+    new_one()
