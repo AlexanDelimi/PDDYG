@@ -32,14 +32,14 @@ def just_plots():
     plt.show()
 
 
-thres_funcs = ['log10(x)', '5', '(log10(x))^2', '0.5*(log10(x))^2', 'sqrt(sqrt(x))', '0.5*sqrt(sqrt(x))']
+thres_funcs = ['log10(x)', 'log4(x)']#'5', '(log10(x))^2', '0.5*(log10(x))^2', 'sqrt(sqrt(x))', '0.5*sqrt(sqrt(x))']
 num_neighbors = [1, 5, 10, 25, 50, 100, 250, 500]
-symbol = {  'log10(x)': '-o',
-            '5': '-*',
-            '(log10(x))^2': '-s',
-            '0.5*(log10(x))^2': '-+',
-            'sqrt(sqrt(x))': '-d',
-            '0.5*sqrt(sqrt(x))': '-x'   }
+symbol = {  'log10(x)': '-o', 'log4(x)': '-*'}
+            #'5': '-*',
+            #'(log10(x))^2': '-s',
+            #'0.5*(log10(x))^2': '-+',
+            #'sqrt(sqrt(x))': '-d',
+            #'0.5*sqrt(sqrt(x))': '-x'   }
 target_points = [   (167,833), (500,833), (833,833),
                     (167,500), (500,500), (833,500),
                     (167,167), (500,167), (833,167)  ]
@@ -48,7 +48,7 @@ target_points = [   (167,833), (500,833), (833,833),
 def get_ready(file):
     from QuadTree import QuadTree
     from random import uniform
-    from math import sqrt
+    from math import sqrt, log
     from time import process_time_ns
     import json
 
@@ -63,11 +63,12 @@ def get_ready(file):
         points = [(uniform(0, 1000), uniform(0, 1000)) for _ in range(x)]
     
         thres['log10(x)'] = i
-        thres['5'] = 5
-        thres['(log10(x))^2'] = i**2
-        thres['0.5*(log10(x))^2'] = 0.5*(i**2)
-        thres['sqrt(sqrt(x))'] = sqrt(sqrt(10**i))
-        thres['0.5*sqrt(sqrt(x))'] = 0.5*sqrt(sqrt(10**i))
+        thres['log4(x)'] = log(x, 4)
+        # thres['5'] = 5
+        # thres['(log10(x))^2'] = i**2
+        # thres['0.5*(log10(x))^2'] = 0.5*(i**2)
+        # thres['sqrt(sqrt(x))'] = sqrt(sqrt(10**i))
+        # thres['0.5*sqrt(sqrt(x))'] = 0.5*sqrt(sqrt(10**i))
 
         results[str(i)] = {}
     
@@ -122,8 +123,17 @@ def and_go(file):
         
         plt.show()
 
+def new_one():
+    from math import log
+    
+    for i in range(1,10):
+        print( 'n=10^' + str(i) + '\td=' + str(log(10**i,4)) )
+
 
 if __name__=='__main__':
-    file = './Quad_Tree_copy/times_5.json'
+    
+    file = './Quad_Tree_copy/times_6.json'
     # get_ready(file)
-    # and_go(file)
+    and_go(file)
+    
+    # new_one()
