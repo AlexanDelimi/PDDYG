@@ -14,7 +14,7 @@ new_file = tk.messagebox.askquestion('', ' C R E A T E')
 if new_file == 'yes':
     
     # get all distribution csv file names in Distributions/CSVs folder
-    filenames = os.listdir('./New_Generator/Distributions/CSVs')
+    filenames = os.listdir('../New_Generator/Distributions/CSVs')
     
     # strip the names to keep only the number
     numbers = []
@@ -46,7 +46,7 @@ elif new_file == 'no':
     if edit_file == 'yes':
 
         # open directory dialog to get the distribution csv file
-        filepath = filedialog.askopenfilename(initialdir='./New_Generator/Distributions/CSVs')
+        filepath = filedialog.askopenfilename(initialdir='../New_Generator/Distributions/CSVs')
         
         if filepath != '':
             # strip the directory to keep only the distribution csv file name
@@ -61,7 +61,7 @@ elif new_file == 'no':
         if delete_files == 'yes':
 
             # open directory dialog to get the distribution csv files
-            filepaths = list(filedialog.askopenfilenames(initialdir='./New_Generator/Distributions/CSVs'))
+            filepaths = list(filedialog.askopenfilenames(initialdir='../New_Generator/Distributions/CSVs'))
             
             for path in filepaths:
                 if 'Distributions' in path:
