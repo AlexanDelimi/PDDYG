@@ -2,6 +2,7 @@
 https://stackoverflow.com/questions/12052379/matplotlib-draw-a-selection-area-in-the-shape-of-a-rectangle-with-the-mouse
 '''
 
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.widgets  import RectangleSelector
@@ -34,10 +35,12 @@ def handle_close(event):
     global file, drs
 
     if len(drs) > 0:
+        abspath = os.path.abspath(__file__)
+        dirname = os.path.dirname(abspath)
         # save rectangles png at close event
-        plt.savefig('../New_Generator/Distributions/PNGs/' + file + '.png')
+        plt.savefig( os.path.join(dirname, 'Distributions', 'PNGs', file + '.png') )
         # save rectangles in drs to distribution csv file at close event
-        drs_to_csv('../New_Generator/Distributions/CSVs/' + file + '.csv', drs)
+        drs_to_csv( os.path.join(dirname, 'Distributions', 'CSVs', file + '.csv'), drs)
 
 
 def open_interface(filename, edit):
@@ -54,7 +57,9 @@ def open_interface(filename, edit):
 
     # load rectangles to edit
     if edit == True:
-        bars = csv_to_bars('../New_Generator/Distributions/CSVs/' + filename + '.csv')
+        abspath = os.path.abspath(__file__)
+        dirname = os.path.dirname(abspath)
+        bars = csv_to_bars( os.path.join(dirname, 'Distributions', 'CSVs', file + '.csv') )
         drs = redraw_bars(bars, ax, drs)
 
     # prepare Rectangle Selector
