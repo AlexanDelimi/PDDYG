@@ -41,6 +41,9 @@ def distribution_to_points(csv_name, set_number):
             rect_area = abs( rect['x_max'] - rect['x_min'] ) * abs( rect['y_max'] - rect['y_min'] )
             num_points = int( (10**set_number) * rect_area / total_area )
 
+            if num_points < 1:
+                num_points = 1
+
             for _ in range(num_points):
                 # create new point in rectangle
                 x = uniform(rect['x_min'], rect['x_max'])
@@ -68,7 +71,7 @@ if __name__ == '__main__':
                 # strip the directory to keep only the distribution csv file name
                 csv_name = re.findall('distr_[0-9]+', path)[0]
 
-                for set_number in range(1,7):
+                for set_number in range(3,7):
                     # create points csv file in each set folder
                     distribution_to_points(csv_name, set_number)
                     
