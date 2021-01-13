@@ -42,7 +42,8 @@ os.chdir(dirname)
 
 max_range = 7
 trees = ['KdTree', 'QuadTree', 'RangeTree']
-num_neighbors = [1, 5, 10, 25, 50, 100, 250, 500]
+
+origin = 'fake' # 'fake' or 'real'
 
 # plt.scatter(*zip(*inner_targets), color='red')
 # plt.scatter(*zip(*outter_targets), color='blue')
@@ -58,15 +59,21 @@ for i in range(1,max_range):
     for tree in trees:
         print('\t' + tree)
 
-        # get all distribution csv file names in Distributions/CSVs folder
-        filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+        # get all distribution csv file names
+        if origin == 'fake':
+            filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+        elif origin == 'real':
+            filenames = os.listdir( '../Internet/formatted_CSVs' )
 
         build_time = 0
 
         for name in filenames:
             print('\t\t' + name)
 
-            csv_file = '../New_Generator/Datasets/set_' + str(i) + '/' + name
+            if origin == 'fake':
+                csv_file = '../New_Generator/Datasets/set_' + str(i) + '/' + name
+            elif origin == 'real':
+                csv_file = '../Internet/Internet_Datasets/set_' + str(i) + '/' + name         
 
             with open(csv_file) as f:
                 
@@ -92,5 +99,10 @@ for i in range(1,max_range):
         build_results[str(i)][tree] = build_time / len(filenames)
 
 pprint(build_results)
-with open('./build.json', 'w') as f:
+
+if origin == 'fake':
+    with open('./build.json', 'w') as f:
+        json.dump(build_results, f)
+elif origin == 'real':
+    with open('./real_build.json', 'w') as f:
         json.dump(build_results, f)

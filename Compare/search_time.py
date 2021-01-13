@@ -52,6 +52,8 @@ outter_targets = [  (-2000, 3000),  (500, 3000),  (3000, 3000),
                     (-2000, 500),                 (3000, 500),
                     (-2000, -2000), (500, -2000), (3000, -2000)  ]
 
+origin = 'fake' # 'fake' or 'real'
+
 # plt.scatter(*zip(*inner_targets), color='red')
 # plt.scatter(*zip(*outter_targets), color='blue')
 # plt.show()
@@ -66,8 +68,11 @@ for i in range(1,max_range):
     for tree in trees:
         print('\t' + tree)
 
-        # get all distribution csv file names in Distributions/CSVs folder
-        filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+        # get all distribution csv file names
+        if origin == 'fake':
+            filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+        elif origin == 'real':
+            filenames = os.listdir( '../Internet/formatted_CSVs' )
 
         search_results[str(i)][tree] = {}
 
@@ -79,7 +84,10 @@ for i in range(1,max_range):
             for name in filenames:
                 print('\t\t\t' + name)
 
-                csv_file = '../New_Generator/Datasets/set_' + str(i) + '/' + name
+                if origin == 'fake':
+                    csv_file = '../New_Generator/Datasets/set_' + str(i) + '/' + name
+                elif origin == 'real':
+                    csv_file = '../Internet/Internet_Datasets/set_' + str(i) + '/' + name
 
                 with open(csv_file) as f:
                     
@@ -116,5 +124,10 @@ for i in range(1,max_range):
                                 
 
 pprint(search_results)
-with open('./search.json', 'w') as f:
+
+if origin == 'fake':
+    with open('./search.json', 'w') as f:
+        json.dump(search_results, f)
+elif origin == 'real':
+    with open('./real_search.json', 'w') as f:
         json.dump(search_results, f)
