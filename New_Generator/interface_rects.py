@@ -11,6 +11,7 @@ root.withdraw()
 
 abspath = os.path.abspath(__file__)
 dirname = os.path.dirname(abspath)
+os.chdir(dirname)
 
 new_file = tk.messagebox.askquestion('', ' C R E A T E')
 

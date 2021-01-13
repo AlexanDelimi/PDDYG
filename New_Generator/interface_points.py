@@ -19,6 +19,8 @@ if __name__ == '__main__':
     # open directory dialog to get the dataset csv file
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
+    os.chdir(dirname)
+    
     filepath = filedialog.askopenfilename(initialdir=os.path.join(dirname,'Datasets'))
 
     #convert points from csv to list of tuples

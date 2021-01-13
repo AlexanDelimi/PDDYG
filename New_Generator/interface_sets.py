@@ -5,9 +5,6 @@ import tkinter as tk
 from random import uniform
 from tkinter import simpledialog, messagebox, filedialog
 
-abspath = os.path.abspath(__file__)
-dirname = os.path.dirname(abspath)
-os.chdir(dirname)
 
 def csv_to_rects(csv_name):
     with open('./Distributions/CSVs/' + csv_name +'.csv', newline='') as csvfile:
@@ -56,6 +53,10 @@ if __name__ == '__main__':
     
     root = tk.Tk() 
     root.withdraw()
+
+    abspath = os.path.abspath(__file__)
+    dirname = os.path.dirname(abspath)
+    os.chdir(dirname)
 
     distr_dir = os.path.join(dirname, 'Distributions', 'CSVs')
 
