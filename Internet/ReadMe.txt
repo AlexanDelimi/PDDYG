@@ -27,7 +27,9 @@ OXI --
 				Longitude min= 19.5 Longitude max= 29.5
 				Latitude min= 34.5 Latitude min= 41.5
 
-			Δεν χρειάζεται scaling δημιουργήθηκε νέο csv με όνομα <<new_greece_upload>> που έχει δύο στήλες -> longitude,latitude
+			μετά το scaling δημιουργήθηκε νέο csv με όνομα <<new_greece_upload>> όπου:
+				new Longitude min= 0.0 new Longitude max= 1000.0
+				new Latitude min= 0.0 new Latitude min= 1000.0
 
 #########################################################################
 
@@ -41,7 +43,9 @@ OXI --
 				Longitude min= 26.5 Longitude max= 44.5
 				Latitude min= 35.5 Latitude min= 42.5
 
-			Δεν χρειάζεται scaling δημιουργήθηκε νέο csv με όνομα <<new_turkey_upload_xi_101509>> που έχει δύο στήλες -> longitude,latitude
+			μετά το scaling δημιουργήθηκε νέο csv με όνομα <<new_turkey_upload_xi_101509>> όπου:
+				new Longitude min= 0.0 new Longitude max= 1000.0
+				new Latitude min= 0.0 new Latitude min= 1000.0
 
 #########################################################################
 
@@ -54,7 +58,9 @@ OXI --
 	Longitude min= 19.9214 Longitude max= 29.5917
 	Latitude min= 34.8345 Latitude min= 41.5833
 
-Δεν χρειάζεται scaling δημιουργήθηκε νέο csv με όνομα <<new_gr_csv>> που έχει δύο στήλες -> longitude,latitude
+μετά το scaling δημιουργήθηκε νέο csv με όνομα <<new_gr_csv>> όπου:
+	new Longitude min= 0.0 new Longitude max= 1000.0
+	new Latitude min= 0.0 new Latitude min= 1000.0
 
 #########################################################################
 
@@ -175,6 +181,10 @@ OXI --
 πριν το scaling:	
 	Longitude min= 34.6576 Longitude max= 35.343
 	Latitude min= 32.4019 Latitude min= 33.9977
+
+μετά το scaling δημιουργήθηκε νέο csv με όνομα <<new_cy>> όπου:
+	new Longitude min= 0.0 new Longitude max= 1000.0
+	new Latitude min= 0.0 new Latitude min= 1000.0
 
 #########################################################################
 
