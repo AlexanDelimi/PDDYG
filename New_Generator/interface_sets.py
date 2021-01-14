@@ -72,7 +72,7 @@ if __name__ == '__main__':
                 # strip the directory to keep only the distribution csv file name
                 csv_name = re.findall('distr_[0-9]+', path)[0]
 
-                for set_number in range(3,7):
+                for set_number in range(1,7):
                     # create points csv file in each set folder
                     distribution_to_points(csv_name, set_number)
                     
