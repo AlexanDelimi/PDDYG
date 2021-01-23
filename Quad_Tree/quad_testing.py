@@ -1,30 +1,44 @@
 from QuadTree import QuadTree
 from random import uniform
+from math import sqrt
+from operator import itemgetter
 
-def main1():
 
-    points = [(uniform(0, 100), uniform(0, 100)) for _ in range(100)]
-    qtree=QuadTree(3, points)
-    qtree.graph()
+''' Build Kd Tree and use it to perform knn search. '''
 
-def main2():
-    
-    # points = [ (-1,-1), (-1,1), (1,-1), (1,1) ]
-    # points = [
-    #     (6,3), (2,6), (-2,4), (7,6), (3,1), (8,0),
-    #     (8,10), (2,5), (12,-2), (3,5), (-1,8), (0,5),
-    #     (3,8), (0,2), (-1,0), (10,2), (11,0)
-    #     ] 
-    points = [(uniform(0, 100), uniform(0, 100)) for _ in range(100)]
-    qtree = QuadTree(5, points)
+# create random points
+max_range = 100
+lista = [(uniform(0, 1000), uniform(0, 1000)) for _ in range(max_range)]
 
-    qtree.graph()
+# build Quad Tree and plot it
+capacity = 5
+qtree = QuadTree(capacity, lista)
+qtree.graph()
 
-    target_point = (uniform(0, 100), uniform(0, 100)) #(0.5,0.5) #(8.2,1.7) #(10,7) #(1,0) #(4.9,4.1)
+# create random target point
+target_point = (uniform(0, 1000), uniform(0, 1000))
 
-    knn = qtree.k_nn(target_point, 10)
+# perform knn search and plot the neighbors
+num_neighbors = 10
+knn = qtree.k_nn(target_point, k=num_neighbors)
+qtree.graph_knn(target_point, knn)
 
-    qtree.graph_knn(target_point, knn)
+''' Perfom knn search with naive way. '''
 
-if __name__=='__main__':
-    main2()
+# keep (index of point in original list, distance from target point) pairs
+pairs = []
+for index in range(len(lista)):
+    point = lista[index]
+    dist = sqrt( (target_point[0] - point[0])**2 + (target_point[1] - point[1])** 2 )
+    pairs.append((index, dist))
+
+# sort the above pairs by ascending distance from target point 
+# and store the points corresponding to the first k indices 
+neighbors = []
+for index in [pair[0] for pair in sorted(pairs, key=itemgetter(1))[0:num_neighbors] ]:
+    neighbors.append(lista[index])
+
+''' Ensure the Kd Tree found all the correct neighbors. '''
+
+if set(knn) == set(neighbors):
+    print('Success')
