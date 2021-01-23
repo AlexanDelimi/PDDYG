@@ -14,10 +14,10 @@ symbol = { 'KdTree': '-o', 'QuadTree': '-*', 'RangeTree': '-s'}
 origin = 'fake' # 'fake' or 'real'
 
 if origin == 'fake':
-    with open('./build.json', 'r') as f:
+    with open('./build_fake.json', 'r') as f:
         build_results = json.load(f)
 elif origin == 'real':
-    with open('./real_build.json', 'r') as f:
+    with open('./build_real.json', 'r') as f:
         build_results = json.load(f)
 
 

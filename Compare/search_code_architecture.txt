@@ -1,0 +1,27 @@
+for i
+	for tree
+		
+		in_dict = { k: T_in }
+		out_dict = { k: T_out }
+		
+		for distr
+			
+			for k
+				//avg inner time for this k and distr
+				t_in = 0
+				for in_target
+					t_in += t'
+				t_in = t_in / 4
+				
+				//avg inner time for this k
+				in_dict[k] += t_in / #distr
+				
+				//avg outter time for this k and distr
+				t_out = 0
+				for out_target
+					t_out += t'
+				t_out = t_out / 4
+				
+				//avg outter time for this k
+				out_dict[k] += t_out / #distr
+		

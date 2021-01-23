@@ -1,0 +1,23 @@
+for i
+
+	for tree
+		
+		in_dict = { k: T_in }
+		out_dict = { k: T_out }
+		
+		for distr
+
+			load pickle
+			
+			for in_target
+				timers = tree.k_nn(in_target, 'True')
+				in_dict += timers
+
+
+			for out_target
+				timers = tree.k_nn(out_target, 'True')
+				out_dict += timers
+
+		in_dict /= 4 * #distr
+		out_dict /= 4 * #distr
+

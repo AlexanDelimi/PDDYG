@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from math import log
 from time import process_time_ns
 import json
+import pickle
+import re
 
 
 ''''''''' IMPORT TREES '''''''''
@@ -38,20 +40,17 @@ dirname = os.path.dirname(abspath)
 os.chdir(dirname)
 
 
-''''''''' SIMPLE TEST '''''''''
+''''''''' MAIN CODE '''''''''
 
-max_range = 7
+min_range = 1
+max_range = 4
 trees = ['KdTree', 'QuadTree', 'RangeTree']
 
 origin = 'fake' # 'fake' or 'real'
 
-# plt.scatter(*zip(*inner_targets), color='red')
-# plt.scatter(*zip(*outter_targets), color='blue')
-# plt.show()
-
 build_results = {}
 
-for i in range(1,max_range):
+for i in range(min_range, max_range):
     print(str(i))
 
     build_results[str(i)] = {}
@@ -61,9 +60,9 @@ for i in range(1,max_range):
 
         # get all distribution csv file names
         if origin == 'fake':
-            filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+            filenames = os.listdir( '../New_Generator/Distributions_4/CSVs' )
         elif origin == 'real':
-            filenames = os.listdir( '../Internet/formatted_CSVs' )
+            filenames = os.listdir( '../Internet/formatted_CSVs_4' )
 
         build_time = 0
 
@@ -95,14 +94,20 @@ for i in range(1,max_range):
                     start = process_time_ns()
                     root = RangeTree(list_of_tuples)
                     build_time = build_time + process_time_ns() - start
+                
+                # eg. set_2_KdTree_distr_5.pkl or set_2_KdTree_new_mrds.pkl
+                pickle_name = 'set_' + str(i) + '_' + tree + '_' + re.sub('.csv', '.pkl', name)
+                
+                with open('./pickle_trees/' + origin + '/' + pickle_name, 'wb') as output:
+                    pickle.dump(root, output, pickle.HIGHEST_PROTOCOL)
                     
         build_results[str(i)][tree] = build_time / len(filenames)
 
 pprint(build_results)
 
 if origin == 'fake':
-    with open('./build.json', 'w') as f:
+    with open('./build_fake.json', 'w') as f:
         json.dump(build_results, f)
 elif origin == 'real':
-    with open('./real_build.json', 'w') as f:
+    with open('./build_real.json', 'w') as f:
         json.dump(build_results, f)
