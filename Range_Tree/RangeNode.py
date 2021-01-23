@@ -1,9 +1,17 @@
 class RangeLeaf():
+    ''' Contains a list of points. '''
+
     def __init__(self, point):
         self.point_list = [point]
 
 
 class RangeNode():
+    ''' 
+    Contains a value, left and right children
+    and the corresponding range tree of the next dimension,
+    if it has one.
+    '''
+
     def __init__(self, value):
         self.value = value
         self.left_child = None
@@ -11,10 +19,14 @@ class RangeNode():
         self.bst_y = None
     
     def insert_leaves(self, lista, dim):
+        ''' Begin insertion of leaves to node. '''
+
         for point in lista:
             self.insert_leaf(point, dim)
     
     def insert_leaf(self, point, dim):
+        ''' Recursively insert leaf at correct branch. '''
+
         if point[dim] <= self.value:
             if self.left_child is None:
                 self.left_child = RangeLeaf(point)
@@ -31,6 +43,7 @@ class RangeNode():
                 self.right_child.insert_leaf(point, dim)
     
     def insert_bst_y(self, lista):
+        ''' Recursively create all range trees of second dimension. '''
 
         list_y = sorted(list(set([point[1] for point in lista])))
         self.bst_y = RangeNode.build_1D_Range_Tree(list_y)
@@ -51,6 +64,7 @@ class RangeNode():
             self.right_child.insert_bst_y(right_lista)
 
     def to_dict(self):
+        ''' Return tree as dictionary to print. '''
 
         dictionary = {
             'value': self.value,
@@ -94,6 +108,8 @@ class RangeNode():
 
     @staticmethod
     def is_leaf(node):
+        ''' Return True if argument is leaf. '''
+        
         if type(node).__name__ == 'RangeLeaf':
             return True
         elif type(node).__name__ == 'RangeNode':

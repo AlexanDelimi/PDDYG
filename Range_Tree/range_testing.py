@@ -1,34 +1,43 @@
-from pprint import pprint
 from RangeTree import RangeTree
+from math import sqrt
+from operator import itemgetter
+from random import uniform
 
 
-def main1():
-    lista = [(6,3), (2,6), (-2,4), (10,9), (3,1), (8,0), (8,10), (2,5), (12,-2), (3,5)]
-    # lista = [(1,2), (2,3), (2,4), (3,1)]
-    
-    rtree = RangeTree(lista)
+''' Build Kd Tree and use it to perform knn search. '''
 
-    pprint(rtree.to_dict())
+# create random points
+max_range = 100
+lista = [(uniform(0, 1000), uniform(0, 1000)) for _ in range(max_range)]
 
-    rtree.graph()
+# build Range Tree and plot it
+rtree = RangeTree(lista)
+rtree.graph()
 
+# create random target point
+target_point = (uniform(0, 1000), uniform(0, 1000))
 
-def main2():
-    lista = [(6,3), (2,6), (-2,4), (10,9), (3,1), (8,0), (8,10), (2,5), (12,-2), (3,5)]
-    # lista = [(1,2), (2,3), (5,4), (3,1),(5,7),(0,0)]
+# perform knn search and plot the neighbors
+num_neighbors = 10
+knn = rtree.k_nn(target_point, k=num_neighbors)
+rtree.graph_knn(target_point, knn)
 
-    # build 2D range tree
-    rtree = RangeTree(lista)
+''' Perfom knn search with naive way. '''
 
-    rtree.graph()
+# keep (index of point in original list, distance from target point) pairs
+pairs = []
+for index in range(len(lista)):
+    point = lista[index]
+    dist = sqrt( (target_point[0] - point[0])**2 + (target_point[1] - point[1])** 2 )
+    pairs.append((index, dist))
 
-    # perform knn query around target
-    target_point = (2,5)
-    knn = rtree.k_nn(target_point, k=7)
+# sort the above pairs by ascending distance from target point 
+# and store the points corresponding to the first k indices 
+neighbors = []
+for index in [pair[0] for pair in sorted(pairs, key=itemgetter(1))[0:num_neighbors] ]:
+    neighbors.append(lista[index])
 
-    rtree.graph_knn(target_point, knn)
-    
+''' Ensure the Kd Tree found all the correct neighbors. '''
 
-
-if __name__ == '__main__':
-    main2()
+if set(knn) == set(neighbors):
+    print('Success')
