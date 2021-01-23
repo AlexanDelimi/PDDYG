@@ -1,23 +1,43 @@
 from KdTree import KdTree
-from pprint import pprint
+from random import uniform
+from math import sqrt
+from operator import itemgetter
 
 
-def main1():
-    point_list = [(7, 2), (5, 4), (9, 6), (4, 7), (8, 1), (2, 3)]
-    ktree = KdTree(point_list)
-    pprint(ktree.to_dict())
-    ktree.graph()
+''' Build Kd Tree and use it to perform knn search. '''
 
+# create random points
+max_range = 100
+lista = [(uniform(0, 1000), uniform(0, 1000)) for _ in range(max_range)]
 
-def main2():
-    point_list = [(7, 2), (5, 4), (9, 6), (4, 7), (8, 1), (2, 3)]
+# build Kd Tree and plot it
+ktree = KdTree(lista)
+ktree.graph()
 
-    ktree = KdTree(point_list)
+# create random target point
+target_point = (uniform(0, 1000), uniform(0, 1000))
 
-    target_point = (2,4)
-    knn = ktree.k_nn(target_point, k=4)
+# perform knn search and plot the neighbors
+num_neighbors = 10
+knn = ktree.k_nn(target_point, k=num_neighbors)
+ktree.graph_knn(target_point, knn)
 
-    ktree.graph_knn(target_point, knn)
+''' Perfom knn search with naive way. '''
 
-if __name__ == "__main__":
-    main2()
+# keep (index of point in original list, distance from target point) pairs
+pairs = []
+for index in range(len(lista)):
+    point = lista[index]
+    dist = sqrt( (target_point[0] - point[0])**2 + (target_point[1] - point[1])** 2 )
+    pairs.append((index, dist))
+
+# sort the above pairs by ascending distance from target point 
+# and store the points corresponding to the first k indices 
+neighbors = []
+for index in [pair[0] for pair in sorted(pairs, key=itemgetter(1))[0:num_neighbors] ]:
+    neighbors.append(lista[index])
+
+''' Ensure the Kd Tree found all the correct neighbors. '''
+
+if set(knn) == set(neighbors):
+    print('Success')

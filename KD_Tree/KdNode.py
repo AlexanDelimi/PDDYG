@@ -4,6 +4,7 @@ line_width = [4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0.3]
 
 
 class KdNode():
+    ''' Contains the point, the right and the left child. '''
 
     def __init__(self, point, left_child, right_child):
         self.point = point
@@ -11,6 +12,7 @@ class KdNode():
         self.right_child = right_child
 
     def to_dict(self):
+        ''' Return tree as dictionary to print. '''
         
         dictionary = {
             'point': self.point,
@@ -27,6 +29,7 @@ class KdNode():
         return dictionary
 
     def plot_tree(self, min_x, max_x, min_y, max_y, prev_node, branch, dimensions, depth=0):
+        ''' Plot the Kd Tree. '''
 
         # tree          (sub)tree to be plotted
         # prev_node     parent node
@@ -81,6 +84,7 @@ class KdNode():
 
     @staticmethod
     def squared_distance(point_1, point_2):
+        ''' Return the squared distance of the points. '''
         
         total = 0
         dims = len(point_1)
@@ -93,6 +97,8 @@ class KdNode():
 
     @staticmethod
     def closest_node(temp_node, best_node, target_point):
+        ''' Return the closest node to target
+        between temp and best nodes. '''
         
         if temp_node is None:
             return best_node
@@ -110,11 +116,13 @@ class KdNode():
 
     @staticmethod
     def nearest_neighbor(node, target_point, dims, depth, nearest_list):
+        ''' Return the nearest neighbor to target point
+        that is not in nearest_list of reported neighbors. '''
 
         if node is None:
             return None
 
-        if node.point in nearest_list:
+        if node.point in nearest_list:  # skip node if already found
             
             nearest_left = KdNode.nearest_neighbor(node.left_child, target_point, dims, depth + 1, nearest_list)
             nearest_right = KdNode.nearest_neighbor(node.right_child, target_point, dims, depth + 1, nearest_list)
