@@ -43,7 +43,7 @@ os.chdir(dirname)
 ''''''''' MAIN CODE '''''''''
 
 min_range = 1
-max_range = 4
+max_range = 7
 trees = ['KdTree', 'QuadTree', 'RangeTree']
 
 origin = 'fake' # 'fake' or 'real'

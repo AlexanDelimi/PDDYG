@@ -1,11 +1,10 @@
 import os
 import sys
-import csv
 from pprint import pprint
-import matplotlib.pyplot as plt
-from math import log
 from time import process_time_ns
 import json
+import pickle
+import re
 
 
 ''''''''' IMPORT TREES '''''''''
@@ -40,94 +39,82 @@ os.chdir(dirname)
 
 ''''''''' SIMPLE TEST '''''''''
 
+min_range = 1
 max_range = 7
 trees = ['KdTree', 'QuadTree', 'RangeTree']
-num_neighbors = [1, 5, 10, 25, 50, 100, 250, 500]
+num_neighbors = [1, 5, 10, 25, 50, 100, 200]
 
-inner_targets = [   (167,833), (500,833), (833,833),
-                    (167,500), (500,500), (833,500),
-                    (167,167), (500,167), (833,167)  ]
+inner_targets = [   (250,750), (750,750),
+                    (250,250), (750,250)
+                ]
 
-outter_targets = [  (-2000, 3000),  (500, 3000),  (3000, 3000),
+outter_targets = [                  (500, 3000),
                     (-2000, 500),                 (3000, 500),
-                    (-2000, -2000), (500, -2000), (3000, -2000)  ]
+                                    (500, -2000)
+                ]
 
 origin = 'fake' # 'fake' or 'real'
 
-# plt.scatter(*zip(*inner_targets), color='red')
-# plt.scatter(*zip(*outter_targets), color='blue')
-# plt.show()
+# load json file with existing search results
+if origin == 'fake':
+    with open('./search_fake.json', 'r') as f:
+        search_results = json.load(f)
+elif origin == 'real':
+    with open('./search_real.json', 'r') as f:
+        search_results = json.load(f)
 
-search_results = {}
 
-for i in range(1,max_range):
+for i in range(min_range, max_range):
     print(str(i))
-
-    search_results[str(i)] = {}
 
     for tree in trees:
         print('\t' + tree)
 
+        # re-initialize inner and outter values to zero before updating them
+        for k in num_neighbors:
+            search_results[str(i)][tree][str(k)]['inner'] = 0
+            search_results[str(i)][tree][str(k)]['outter'] = 0
+
         # get all distribution csv file names
         if origin == 'fake':
-            filenames = os.listdir( '../New_Generator/Distributions/CSVs' )
+            filenames = os.listdir( '../New_Generator/Distributions_4/CSVs' )
         elif origin == 'real':
-            filenames = os.listdir( '../Internet/formatted_CSVs' )
+            filenames = os.listdir( '../Internet/formatted_CSVs_4' )
 
-        search_results[str(i)][tree] = {}
+        for name in filenames:
+            print('\t\t' + name)
 
+            # eg. set_2_KdTree_distr_5.pkl or set_2_KdTree_new_mrds.pkl
+            pickle_name = 'set_' + str(i) + '_' + tree + '_' + re.sub('.csv', '.pkl', name)
+            
+            # load (any kind of) tree from pickle
+            with open('./pickle_trees/' + origin + '/' + pickle_name, 'rb') as input:
+                root = pickle.load(input)
+                
+                # get timers dictionary for inner target
+                for in_target in inner_targets:
+                    in_timers = root.k_nn(in_target, timing='True')
+                    # add corresponding inner timers to each other
+                    for k in num_neighbors:
+                        search_results[str(i)][tree][str(k)]['inner'] += in_timers[str(k)]
+                
+                # get timers dictionary for outter target
+                for out_target in outter_targets:
+                    out_timers = root.k_nn(out_target, timing='True')
+                    # add corresponding outter timers to each other
+                    for k in num_neighbors:
+                        search_results[str(i)][tree][str(k)]['outter'] += out_timers[str(k)] 
+                
+        # average inner and outter timers between targets and distributions
         for k in num_neighbors:
-            print('\t\t' + str(k))
+            search_results[str(i)][tree][str(k)]['inner'] /= (len(inner_targets) * len(filenames))
+            search_results[str(i)][tree][str(k)]['outter'] /= (len(outter_targets) * len(filenames))
 
-            search_results[str(i)][tree][str(k)] = { 'inner': 0, 'outter': 0}
-        
-            for name in filenames:
-                print('\t\t\t' + name)
 
-                if origin == 'fake':
-                    csv_file = '../New_Generator/Datasets/set_' + str(i) + '/' + name
-                elif origin == 'real':
-                    csv_file = '../Internet/Internet_Datasets/set_' + str(i) + '/' + name
-
-                with open(csv_file) as f:
-                    
-                    list_of_tuples = [tuple([float(i) for i in line]) for line in csv.reader(f)]
-
-                    root = None
-
-                    if tree == 'KdTree':
-                        root = KdTree(list_of_tuples)
-
-                    elif tree == 'QuadTree':
-                        root = QuadTree(log(10**i, 4), list_of_tuples)
-
-                    elif tree == 'RangeTree':
-                        root = RangeTree(list_of_tuples)
-
-                    start = process_time_ns()
-                    for in_target in inner_targets:
-                        _ = root.k_nn(in_target, k)  
-                    elapsed = process_time_ns() - start
-
-                    search_results[str(i)][tree][str(k)]['inner'] += elapsed / len(inner_targets)
-
-                    start = process_time_ns()
-                    for out_target in outter_targets:
-                        _ = root.k_nn(out_target, k)  
-                    elapsed = process_time_ns() - start
-
-                    search_results[str(i)][tree][str(k)]['outter'] += elapsed / len(outter_targets)
-                    
-                    
-            search_results[str(i)][tree][str(k)]['inner'] /= len(filenames)
-            search_results[str(i)][tree][str(k)]['outter'] /= len(filenames)        
-                                
-
-pprint(search_results)
-
+# store json file with updated search results
 if origin == 'fake':
-    with open('./search.json', 'w') as f:
+    with open('./search_fake.json', 'w') as f:
         json.dump(search_results, f)
 elif origin == 'real':
-    with open('./real_search.json', 'w') as f:
+    with open('./search_real.json', 'w') as f:
         json.dump(search_results, f)
