@@ -1,0 +1,63 @@
+digraph G {
+    
+    subgraph sw {
+        node [color = blue];
+        sw;
+        sw_sw;
+        sw_se;
+        sw_nw;
+        sw_ne;
+    }
+    
+    subgraph sw {
+        node [color = green];
+        se;
+        se_sw;
+        se_se;
+        se_nw;
+        se_ne;
+    }
+    
+    subgraph sw {
+        node [color = orange];
+        nw;
+        nw_sw;
+        nw_se;
+        nw_nw;
+        nw_ne;
+    }
+    
+    subgraph root {
+        node [color = red];
+        ne;
+        ne_sw;
+        ne_se;
+        ne_nw;
+        ne_ne;
+    }
+    
+    root -> sw;
+    root -> se;
+    root -> nw;
+    root -> ne;
+    
+    sw -> sw_sw [color=blue];
+    sw -> sw_se [color=blue];
+    sw -> sw_nw [color=blue];
+    sw -> sw_ne [color=blue];
+    
+    se -> se_sw [color=green];
+    se -> se_se [color=green];
+    se -> se_nw [color=green];
+    se -> se_ne [color=green];
+    
+    nw -> nw_sw [color=orange];
+    nw -> nw_se [color=orange];
+    nw -> nw_nw [color=orange];
+    nw -> nw_ne [color=orange];
+    
+    ne -> ne_sw [color=red];
+    ne -> ne_se [color=red];
+    ne -> ne_nw [color=red];
+    ne -> ne_ne [color=red];
+}
