@@ -77,11 +77,13 @@ def plot_search_times(file):
             for func in thres_funcs:
 
                 axs[i//4, (i-1)%3].plot(num_neighbors, 
-                                        [ results[str(i)][func][str(k)] for k in num_neighbors ],
+                                        [ results[str(i)][func][str(k)] / (10**6) for k in num_neighbors ],
                                         symbol[func], 
                                         label=func)
 
                 axs[i//4, (i-1)%3].set_title('10**' + str(i) + ' points')
+                axs[i//4, (i-1)%3].set_ylabel('milliseconds')
+                axs[i//4, (i-1)%3].set_xlabel('number of neighbors')
                 axs[i//4, (i-1)%3].legend()
         
         plt.show()
