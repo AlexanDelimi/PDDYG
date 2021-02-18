@@ -15,12 +15,13 @@ class KdTree():
     def __init__(self, point_list):
         ''' Kd Tree constructor. '''
 
-        self.num_points = len(point_list)
-        self.xmin = min(point_list, key=itemgetter(0))[0]
-        self.ymin = min(point_list, key=itemgetter(1))[1]
-        self.xmax = max(point_list, key=itemgetter(0))[0]
-        self.ymax = max(point_list, key=itemgetter(1))[1]
-        self.root = KdTree.build_kdtree(point_list, 2)
+        lista = list(set(point_list))
+        self.num_points = len(lista)
+        self.xmin = min(lista, key=itemgetter(0))[0]
+        self.ymin = min(lista, key=itemgetter(1))[1]
+        self.xmax = max(lista, key=itemgetter(0))[0]
+        self.ymax = max(lista, key=itemgetter(1))[1]
+        self.root = KdTree.build_kdtree(lista, 2)
 
     @staticmethod
     def build_kdtree(point_list, dimensions, depth: int = 0):
