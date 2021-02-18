@@ -1,27 +1,23 @@
 for i
+
 	for tree
 		
 		in_dict = { k: T_in }
 		out_dict = { k: T_out }
 		
 		for distr
+
+			load pickle
 			
-			for k
-				//avg inner time for this k and distr
-				t_in = 0
-				for in_target
-					t_in += t'
-				t_in = t_in / 4
-				
-				//avg inner time for this k
-				in_dict[k] += t_in / #distr
-				
-				//avg outter time for this k and distr
-				t_out = 0
-				for out_target
-					t_out += t'
-				t_out = t_out / 4
-				
-				//avg outter time for this k
-				out_dict[k] += t_out / #distr
-		
+			for in_target
+				timers = tree.k_nn(in_target, 'True')
+				in_dict += timers
+
+
+			for out_target
+				timers = tree.k_nn(out_target, 'True')
+				out_dict += timers
+
+		in_dict /= 4 * #distr
+		out_dict /= 4 * #distr
+
