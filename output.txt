@@ -1,0 +1,541 @@
+Folder PATH listing for volume Œâ¦ª «æ£¦ª
+Volume serial number is 020F-E318
+D:.
+|   .gitignore
+|   charts_design.png
+|   graphviz_code.txt
+|   output.doc
+|   output.txt
+|   perfect_quad.py
+|   README.md
+|   target_points.py
+|   timer_functions.txt
+|   weaknesses.txt
+|   
++---.idea
+|   |   .gitignore
+|   |   misc.xml
+|   |   modules.xml
+|   |   PDDYG.iml
+|   |   vcs.xml
+|   |   
+|   \---inspectionProfiles
+|           profiles_settings.xml
+|           
++---Compare
+|   |   build_fake.json
+|   |   build_plot.py
+|   |   build_real.json
+|   |   build_time.py
+|   |   search_code_architecture.txt
+|   |   search_code_architecture_2.txt
+|   |   search_fake.json
+|   |   search_init.py
+|   |   search_plot.py
+|   |   search_real.json
+|   |   search_time.py
+|   |   
+|   \---pickle_trees
+|       +---fake
+|       |       set_1_KdTree_distr_10.pkl
+|       |       set_1_KdTree_distr_4.pkl
+|       |       set_1_KdTree_distr_7.pkl
+|       |       set_1_KdTree_distr_8.pkl
+|       |       set_1_QuadTree_distr_10.pkl
+|       |       set_1_QuadTree_distr_4.pkl
+|       |       set_1_QuadTree_distr_7.pkl
+|       |       set_1_QuadTree_distr_8.pkl
+|       |       set_1_RangeTree_distr_10.pkl
+|       |       set_1_RangeTree_distr_4.pkl
+|       |       set_1_RangeTree_distr_7.pkl
+|       |       set_1_RangeTree_distr_8.pkl
+|       |       set_2_KdTree_distr_10.pkl
+|       |       set_2_KdTree_distr_4.pkl
+|       |       set_2_KdTree_distr_7.pkl
+|       |       set_2_KdTree_distr_8.pkl
+|       |       set_2_QuadTree_distr_10.pkl
+|       |       set_2_QuadTree_distr_4.pkl
+|       |       set_2_QuadTree_distr_7.pkl
+|       |       set_2_QuadTree_distr_8.pkl
+|       |       set_2_RangeTree_distr_10.pkl
+|       |       set_2_RangeTree_distr_4.pkl
+|       |       set_2_RangeTree_distr_7.pkl
+|       |       set_2_RangeTree_distr_8.pkl
+|       |       set_3_KdTree_distr_10.pkl
+|       |       set_3_KdTree_distr_4.pkl
+|       |       set_3_KdTree_distr_7.pkl
+|       |       set_3_KdTree_distr_8.pkl
+|       |       set_3_QuadTree_distr_10.pkl
+|       |       set_3_QuadTree_distr_4.pkl
+|       |       set_3_QuadTree_distr_7.pkl
+|       |       set_3_QuadTree_distr_8.pkl
+|       |       set_3_RangeTree_distr_10.pkl
+|       |       set_3_RangeTree_distr_4.pkl
+|       |       set_3_RangeTree_distr_7.pkl
+|       |       set_3_RangeTree_distr_8.pkl
+|       |       set_4_KdTree_distr_10.pkl
+|       |       set_4_KdTree_distr_4.pkl
+|       |       set_4_KdTree_distr_7.pkl
+|       |       set_4_KdTree_distr_8.pkl
+|       |       set_4_QuadTree_distr_10.pkl
+|       |       set_4_QuadTree_distr_4.pkl
+|       |       set_4_QuadTree_distr_7.pkl
+|       |       set_4_QuadTree_distr_8.pkl
+|       |       set_4_RangeTree_distr_10.pkl
+|       |       set_4_RangeTree_distr_4.pkl
+|       |       set_4_RangeTree_distr_7.pkl
+|       |       set_4_RangeTree_distr_8.pkl
+|       |       set_5_KdTree_distr_10.pkl
+|       |       set_5_KdTree_distr_4.pkl
+|       |       set_5_KdTree_distr_7.pkl
+|       |       set_5_KdTree_distr_8.pkl
+|       |       set_5_QuadTree_distr_10.pkl
+|       |       set_5_QuadTree_distr_4.pkl
+|       |       set_5_QuadTree_distr_7.pkl
+|       |       set_5_QuadTree_distr_8.pkl
+|       |       set_5_RangeTree_distr_10.pkl
+|       |       set_5_RangeTree_distr_4.pkl
+|       |       set_5_RangeTree_distr_7.pkl
+|       |       set_5_RangeTree_distr_8.pkl
+|       |       set_6_KdTree_distr_10.pkl
+|       |       set_6_KdTree_distr_4.pkl
+|       |       set_6_KdTree_distr_7.pkl
+|       |       set_6_KdTree_distr_8.pkl
+|       |       set_6_QuadTree_distr_10.pkl
+|       |       set_6_QuadTree_distr_4.pkl
+|       |       set_6_QuadTree_distr_7.pkl
+|       |       set_6_QuadTree_distr_8.pkl
+|       |       set_6_RangeTree_distr_10.pkl
+|       |       set_6_RangeTree_distr_4.pkl
+|       |       set_6_RangeTree_distr_7.pkl
+|       |       set_6_RangeTree_distr_8.pkl
+|       |       
+|       \---real
+|               set_1_KdTree_new_au.pkl
+|               set_1_KdTree_new_gr.pkl.pkl
+|               set_1_KdTree_new_mrds.pkl
+|               set_1_KdTree_new_uszips.pkl
+|               set_1_QuadTree_new_au.pkl
+|               set_1_QuadTree_new_gr.pkl.pkl
+|               set_1_QuadTree_new_mrds.pkl
+|               set_1_QuadTree_new_uszips.pkl
+|               set_1_RangeTree_new_au.pkl
+|               set_1_RangeTree_new_gr.pkl.pkl
+|               set_1_RangeTree_new_mrds.pkl
+|               set_1_RangeTree_new_uszips.pkl
+|               set_2_KdTree_new_au.pkl
+|               set_2_KdTree_new_gr.pkl.pkl
+|               set_2_KdTree_new_mrds.pkl
+|               set_2_KdTree_new_uszips.pkl
+|               set_2_QuadTree_new_au.pkl
+|               set_2_QuadTree_new_gr.pkl.pkl
+|               set_2_QuadTree_new_mrds.pkl
+|               set_2_QuadTree_new_uszips.pkl
+|               set_2_RangeTree_new_au.pkl
+|               set_2_RangeTree_new_gr.pkl.pkl
+|               set_2_RangeTree_new_mrds.pkl
+|               set_2_RangeTree_new_uszips.pkl
+|               set_3_KdTree_new_au.pkl
+|               set_3_KdTree_new_gr.pkl.pkl
+|               set_3_KdTree_new_mrds.pkl
+|               set_3_KdTree_new_uszips.pkl
+|               set_3_QuadTree_new_au.pkl
+|               set_3_QuadTree_new_gr.pkl.pkl
+|               set_3_QuadTree_new_mrds.pkl
+|               set_3_QuadTree_new_uszips.pkl
+|               set_3_RangeTree_new_au.pkl
+|               set_3_RangeTree_new_gr.pkl.pkl
+|               set_3_RangeTree_new_mrds.pkl
+|               set_3_RangeTree_new_uszips.pkl
+|               set_4_KdTree_new_au.pkl
+|               set_4_KdTree_new_gr.pkl.pkl
+|               set_4_KdTree_new_mrds.pkl
+|               set_4_KdTree_new_uszips.pkl
+|               set_4_QuadTree_new_au.pkl
+|               set_4_QuadTree_new_gr.pkl.pkl
+|               set_4_QuadTree_new_mrds.pkl
+|               set_4_QuadTree_new_uszips.pkl
+|               set_4_RangeTree_new_au.pkl
+|               set_4_RangeTree_new_gr.pkl.pkl
+|               set_4_RangeTree_new_mrds.pkl
+|               set_4_RangeTree_new_uszips.pkl
+|               set_5_KdTree_new_au.pkl
+|               set_5_KdTree_new_gr.pkl.pkl
+|               set_5_KdTree_new_mrds.pkl
+|               set_5_KdTree_new_uszips.pkl
+|               set_5_QuadTree_new_au.pkl
+|               set_5_QuadTree_new_gr.pkl.pkl
+|               set_5_QuadTree_new_mrds.pkl
+|               set_5_QuadTree_new_uszips.pkl
+|               set_5_RangeTree_new_au.pkl
+|               set_5_RangeTree_new_gr.pkl.pkl
+|               set_5_RangeTree_new_mrds.pkl
+|               set_5_RangeTree_new_uszips.pkl
+|               set_6_KdTree_new_au.pkl
+|               set_6_KdTree_new_gr.pkl.pkl
+|               set_6_KdTree_new_mrds.pkl
+|               set_6_KdTree_new_uszips.pkl
+|               set_6_QuadTree_new_au.pkl
+|               set_6_QuadTree_new_gr.pkl.pkl
+|               set_6_QuadTree_new_mrds.pkl
+|               set_6_QuadTree_new_uszips.pkl
+|               set_6_RangeTree_new_au.pkl
+|               set_6_RangeTree_new_gr.pkl.pkl
+|               set_6_RangeTree_new_mrds.pkl
+|               set_6_RangeTree_new_uszips.pkl
+|               
++---Internet
+|   |   fill_internet_datasets.py
+|   |   helper_functions.py
+|   |   ReadMe.txt
+|   |   
+|   +---formatted_CSVs
+|   |       new_Allegheny_County_Dam_Locations.csv
+|   |       new_au.csv
+|   |       new_cy.csv
+|   |       new_gr_csv.csv
+|   |       new_Loudoun_Wells.csv
+|   |       new_mrds.csv
+|   |       new_parcelcoords.csv
+|   |       new_uszips.csv
+|   |       
+|   +---formatted_CSVs_4
+|   |       new_au.csv
+|   |       new_gr_csv.csv
+|   |       new_mrds.csv
+|   |       new_uszips.csv
+|   |       
+|   +---formatted_PNGs
+|   |       new_Allegheny_County_Dam_Locations.png
+|   |       new_au.png
+|   |       new_cy.png
+|   |       new_gr_csv.png
+|   |       new_Loudoun_Wells.png
+|   |       new_mrds.png
+|   |       new_parcelcoords.png
+|   |       new_uszips.png
+|   |       
+|   +---Internet_Datasets
+|   |   +---set_1
+|   |   |       new_Allegheny_County_Dam_Locations.csv
+|   |   |       new_au.csv
+|   |   |       new_cy.csv
+|   |   |       new_gr_csv.csv
+|   |   |       new_Loudoun_Wells.csv
+|   |   |       new_mrds.csv
+|   |   |       new_parcelcoords.csv
+|   |   |       new_uszips.csv
+|   |   |       
+|   |   +---set_2
+|   |   |       new_Allegheny_County_Dam_Locations.csv
+|   |   |       new_au.csv
+|   |   |       new_cy.csv
+|   |   |       new_gr_csv.csv
+|   |   |       new_Loudoun_Wells.csv
+|   |   |       new_mrds.csv
+|   |   |       new_parcelcoords.csv
+|   |   |       new_uszips.csv
+|   |   |       
+|   |   +---set_3
+|   |   |       new_Allegheny_County_Dam_Locations.csv
+|   |   |       new_au.csv
+|   |   |       new_cy.csv
+|   |   |       new_gr_csv.csv
+|   |   |       new_Loudoun_Wells.csv
+|   |   |       new_mrds.csv
+|   |   |       new_parcelcoords.csv
+|   |   |       new_uszips.csv
+|   |   |       
+|   |   +---set_4
+|   |   |       new_Allegheny_County_Dam_Locations.csv
+|   |   |       new_au.csv
+|   |   |       new_cy.csv
+|   |   |       new_gr_csv.csv
+|   |   |       new_Loudoun_Wells.csv
+|   |   |       new_mrds.csv
+|   |   |       new_parcelcoords.csv
+|   |   |       new_uszips.csv
+|   |   |       
+|   |   +---set_5
+|   |   |       new_Allegheny_County_Dam_Locations.csv
+|   |   |       new_au.csv
+|   |   |       new_cy.csv
+|   |   |       new_gr_csv.csv
+|   |   |       new_Loudoun_Wells.csv
+|   |   |       new_mrds.csv
+|   |   |       new_parcelcoords.csv
+|   |   |       new_uszips.csv
+|   |   |       
+|   |   \---set_6
+|   |           new_Allegheny_County_Dam_Locations.csv
+|   |           new_au.csv
+|   |           new_cy.csv
+|   |           new_gr_csv.csv
+|   |           new_Loudoun_Wells.csv
+|   |           new_mrds.csv
+|   |           new_parcelcoords.csv
+|   |           new_uszips.csv
+|   |           
+|   \---original_CSVs
+|           Allegheny_County_Dam_Locations.csv
+|           au.csv
+|           cy.csv
+|           gr_csv.csv
+|           Loudoun_Wells.csv
+|           mrds.zip
+|           parcelcoords.csv
+|           uszips.csv
+|           
++---KD_Tree
+|   |   KdNode.py
+|   |   KdTree.py
+|   |   kd_testing.py
+|   |   
+|   +---Sources
+|   |       KD Tree links.txt
+|   |       
+|   \---__pycache__
+|           batch_insert.cpython-38.pyc
+|           draw_kd_tree.cpython-38.pyc
+|           KdNode.cpython-38.pyc
+|           KdTree.cpython-38.pyc
+|           neighbor.cpython-38.pyc
+|           node_class.cpython-38.pyc
+|           serial_insert.cpython-38.pyc
+|           
++---KD_Tree_old
+|   |   batch_insert.py
+|   |   draw_kd_tree.py
+|   |   KD Tree links.txt
+|   |   k_neighbors.py
+|   |   neighbor.py
+|   |   node_class.py
+|   |   serial_insert.py
+|   |   wikipedia_code.py
+|   |   
+|   \---__pycache__
+|           batch_insert.cpython-38.pyc
+|           draw_kd_tree.cpython-38.pyc
+|           neighbor.cpython-38.pyc
+|           node_class.cpython-38.pyc
+|           serial_insert.cpython-38.pyc
+|           
++---New_Generator
+|   |   dependencies.txt
+|   |   draggable_rectangle.py
+|   |   draw_rectangles.py
+|   |   interface_points.py
+|   |   interface_rects.py
+|   |   interface_sets.py
+|   |   rectangles_csv_handling.py
+|   |   
+|   +---Datasets
+|   |   +---set_1
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   +---set_2
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   +---set_3
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   +---set_4
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   +---set_5
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   \---set_6
+|   |           distr_1.csv
+|   |           distr_10.csv
+|   |           distr_2.csv
+|   |           distr_3.csv
+|   |           distr_4.csv
+|   |           distr_5.csv
+|   |           distr_6.csv
+|   |           distr_7.csv
+|   |           distr_8.csv
+|   |           distr_9.csv
+|   |           
+|   +---Distributions
+|   |   +---CSVs
+|   |   |       distr_1.csv
+|   |   |       distr_10.csv
+|   |   |       distr_2.csv
+|   |   |       distr_3.csv
+|   |   |       distr_4.csv
+|   |   |       distr_5.csv
+|   |   |       distr_6.csv
+|   |   |       distr_7.csv
+|   |   |       distr_8.csv
+|   |   |       distr_9.csv
+|   |   |       
+|   |   \---PNGs
+|   |           distr_1.png
+|   |           distr_10.png
+|   |           distr_2.png
+|   |           distr_3.png
+|   |           distr_4.png
+|   |           distr_5.png
+|   |           distr_6.png
+|   |           distr_7.png
+|   |           distr_8.png
+|   |           distr_9.png
+|   |           
+|   +---Distributions_4
+|   |   \---CSVs
+|   |           distr_10.csv
+|   |           distr_4.csv
+|   |           distr_7.csv
+|   |           distr_8.csv
+|   |           
+|   \---__pycache__
+|           draggable_rectangle.cpython-38.pyc
+|           draw_rectangles.cpython-38.pyc
+|           rectangles_csv_handling.cpython-38.pyc
+|           
++---Points_Generator
+|   |   dependencies_explanation.docx
+|   |   dependencies_explanation.pdf
+|   |   dependencies_graph.pdf
+|   |   dependencies_graph.vsdx
+|   |   draggable_rectangle.py
+|   |   draw_rectangles.py
+|   |   generator.py
+|   |   points_csv_handling.py
+|   |   randomNumberGenerator.py
+|   |   rectangles_csv_handling.py
+|   |   rects_to_points.py
+|   |   
+|   \---__pycache__
+|           draggable_rectangle.cpython-38.pyc
+|           rectangles_csv_handling.cpython-38.pyc
+|           
++---Quad_Tree
+|   |   QuadNode.py
+|   |   QuadTree.py
+|   |   quad_testing.py
+|   |   quad_tuning.py
+|   |   search_times.json
+|   |   
+|   +---Sources
+|   |       knn_1.png
+|   |       knn_2.png
+|   |       Quad Tree links.txt
+|   |       tuning_sources.txt
+|   |       
+|   \---__pycache__
+|           QuadNode.cpython-38.pyc
+|           QuadTree.cpython-38.pyc
+|           
++---Quad_Tree_old
+|   +---Code
+|   |   |   functions.py
+|   |   |   knnSearch.py
+|   |   |   neighbors.py
+|   |   |   quad.py
+|   |   |   
+|   |   \---__pycache__
+|   |           quad.cpython-38.pyc
+|   |           
+|   +---Sources
+|   |       knn_1.png
+|   |       knn_2.png
+|   |       Quad Tree links.txt
+|   |       
+|   \---__pycache__
++---Range_Tree
+|   |   RangeNode.py
+|   |   RangeTree.py
+|   |   range_testing.py
+|   |   
+|   +---Sources
+|   |       2D Range Tree links.txt
+|   |       Kef-7-Range-Tree-Sioutas.pdf
+|   |       Lect-21-Range-Query-wustl.pdf
+|   |       Lect-8-Range-Tree-ufl.pdf
+|   |       Range-Tree-cmu.pdf
+|   |       Range-Tree-cvut.pdf
+|   |       try_1.png
+|   |       try_2.png
+|   |       try_3.png
+|   |       try_4.png
+|   |       Tutorialspoint-Range-Tree.pdf
+|   |       Wikipedia-Range-Tree.pdf
+|   |       
+|   \---__pycache__
+|           build_1D_Range_Tree.cpython-38.pyc
+|           build_2D_Range_Tree.cpython-38.pyc
+|           RangeNode.cpython-38.pyc
+|           RangeTree.cpython-38.pyc
+|           
+\---Range_Tree_old
+    +---Code
+    |   |   build_1D_Range_Tree.py
+    |   |   build_2D_Range_Tree.py
+    |   |   knn_1D.py
+    |   |   knn_2D.py
+    |   |   
+    |   \---__pycache__
+    |           build_1D_Range_Tree.cpython-38.pyc
+    |           build_2D_Range_Tree.cpython-38.pyc
+    |           
+    \---Sources
+            2D Range Tree links.txt
+            Kef-7-Range-Tree-Sioutas.pdf
+            Lect-21-Range-Query-wustl.pdf
+            Lect-8-Range-Tree-ufl.pdf
+            Range-Tree-cmu.pdf
+            Range-Tree-cvut.pdf
+            try_1.png
+            try_2.png
+            try_3.png
+            try_4.png
+            Tutorialspoint-Range-Tree.pdf
+            Wikipedia-Range-Tree.pdf
+            

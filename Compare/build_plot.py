@@ -26,14 +26,16 @@ _, ax = plt.subplots()
 for tree in trees:
 
     plt.plot(build_results.keys(), 
-            [ build_results[str(i)][tree] for i in build_results.keys() ],
+            [ build_results[str(i)][tree] / (10**9) for i in build_results.keys() ],
             symbol[tree], 
             label=tree)
     # axs[i//4, (i-1)%3].plot(num_neighbors, 
     #                         [ log10( results[str(i)][func][str(k)] + 10**0.001 ) for k in num_neighbors ],
     #                         symbol[func], 
     #                         label=func)
-    ax.set_title('Build Time')
-    ax.legend()
+ax.set_title('Build Times for Fake Distributions')
+ax.set_ylabel('time (sec)')
+ax.set_xlabel('base 10 logarithmic number of points')
+ax.legend()
 
 plt.show()

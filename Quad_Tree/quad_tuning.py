@@ -81,8 +81,8 @@ def plot_search_times(file):
                                         symbol[func], 
                                         label=func)
 
-                axs[i//4, (i-1)%3].set_title('10**' + str(i) + ' points')
-                axs[i//4, (i-1)%3].set_ylabel('milliseconds')
+                axs[i//4, (i-1)%3].set_title('10^' + str(i) + ' points')
+                axs[i//4, (i-1)%3].set_ylabel('time (msec)')
                 axs[i//4, (i-1)%3].set_xlabel('number of neighbors')
                 axs[i//4, (i-1)%3].legend()
         
