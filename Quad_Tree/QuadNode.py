@@ -7,6 +7,8 @@ class QuadNode:
     stores either four children or up to k leaves.
     '''
     def __init__(self, x, y, w, h):
+        ''' Quad node constructor. '''
+        
         self.x = x
         self.y = y
         self.width = w

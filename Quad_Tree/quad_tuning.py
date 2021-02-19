@@ -1,3 +1,9 @@
+''' This file was used to find the best function 
+to use as the maximum capacity of the Quad Tree nodes.
+The best function would perform the fastest knn queries.
+The search times are stored in search_times.json file.
+'''
+
 from QuadTree import QuadTree
 from random import uniform
 from math import sqrt, log
