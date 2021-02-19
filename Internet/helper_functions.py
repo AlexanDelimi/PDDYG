@@ -1,3 +1,9 @@
+''' The functions in this file help us ensure
+that the formatted real datasets created by 
+downsampling and oversampling the original datasets
+are formatted as needed.
+'''
+
 import os
 import csv
 from operator import itemgetter
@@ -5,6 +11,8 @@ from pprint import pprint
 
 
 def formatted_sizes():
+    ''' Print the sizes of the formatted real datasets. '''
+
     size = {}
     filenames = os.listdir( './formatted_CSVs' )
     for name in filenames:
@@ -15,6 +23,8 @@ def formatted_sizes():
 
 
 def formatted_ranges():
+    ''' Print the coordinates range of the formatted real datasets. '''
+
     filenames = os.listdir( './formatted_CSVs' )
     for name in filenames:
         print(name)
@@ -29,6 +39,8 @@ def formatted_ranges():
 
 
 def dataset_sizes():
+    ''' Print the sizes of the real datasets before formatting them. '''
+
     for i in range(1, 7):
         print(i)
         filenames = os.listdir( './Internet_Datasets/set_' + str(i) )
