@@ -1,3 +1,10 @@
+'''
+This file calculates and stores the search times of each tree
+for every order of dataset size, for all number of neighbors
+and for all types of target points. By setting the variable 'origin'
+we perform knn queries on trees built using fake or real datasets.
+'''
+
 import os
 import sys
 from pprint import pprint
@@ -37,7 +44,7 @@ dirname = os.path.dirname(abspath)
 os.chdir(dirname)
 
 
-''''''''' SIMPLE TEST '''''''''
+''''''''' MAIN CODE '''''''''
 
 min_range = 1
 max_range = 7
