@@ -13,7 +13,7 @@ dirname = os.path.dirname(abspath)
 os.chdir(dirname)
 
 # go to Quad_Tree folder directory
-os.chdir('./Quad_Tree')
+os.chdir('../Quad_Tree')
 sys.path.insert(1, os.getcwd())
 from QuadTree import QuadTree
 

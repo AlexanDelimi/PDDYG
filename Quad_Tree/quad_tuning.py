@@ -97,6 +97,6 @@ def plot_search_times(file):
 
 if __name__=='__main__':
     
-    file = './Quad_Tree/search_times.json'
+    file = './search_times.json'
     # store_search_times(file)
     plot_search_times(file)
