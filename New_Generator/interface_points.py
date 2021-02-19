@@ -1,3 +1,8 @@
+'''
+By running this file 
+we can choose a dataset and visualize it.
+'''
+
 import os
 import csv
 import tkinter as tk
@@ -21,6 +26,7 @@ if __name__ == '__main__':
     dirname = os.path.dirname(abspath)
     os.chdir(dirname)
     
+    # ask to choose file
     filepath = filedialog.askopenfilename(initialdir=os.path.join(dirname,'Datasets'))
 
     #convert points from csv to list of tuples

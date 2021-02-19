@@ -1,3 +1,8 @@
+'''
+This file contains one function to store the rectangles that we draw
+and one function that redraws stored rectangles.
+'''
+
 import csv
 
 def drs_to_csv(csv_file, drs):

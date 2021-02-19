@@ -1,5 +1,10 @@
 '''
-https://stackoverflow.com/questions/12052379/matplotlib-draw-a-selection-area-in-the-shape-of-a-rectangle-with-the-mouse
+This file contains functions that allow us to
+draw new rectangles,
+move them,
+delete them
+and store them.
+Also it can redraw stored rectangles to edit them again.
 '''
 
 import os

@@ -1,3 +1,9 @@
+'''
+By running this file
+1) we can create datasets of all orders of size for the distribution we choose
+2) we can delete every dataset related to the distribution we choose.
+'''
+
 import os
 import re
 import csv

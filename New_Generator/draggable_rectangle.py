@@ -1,5 +1,5 @@
 '''
-https://matplotlib.org/users/event_handling.html#draggable-rectangle-exercise
+This files contains the class that allows us to move and delete rectangles.
 '''
 
 import numpy as np
@@ -15,7 +15,6 @@ class DraggableRectangle:
         self.rect = rect
         self.press = None
         self.id = ID
-        # print(self.id)
         ID = ID + 1
 
     def connect(self):
@@ -29,13 +28,11 @@ class DraggableRectangle:
 
     def on_press(self, event):
         global drs
-        # print(event)
         'on button press we will see if the mouse is over us and store some data'
         if event.inaxes != self.rect.axes: return
 
-        contains, _ = self.rect.contains(event)     # '_' was 'attrd' for some reason
+        contains, _ = self.rect.contains(event)
         if not contains: return
-        # print('event contains', self.rect.xy)
 
         if event.button == 3:
             x0, y0 = self.rect.xy
@@ -45,9 +42,6 @@ class DraggableRectangle:
                 if d_rect.id == self.id:
                     d_rect.rect.set_visible(False)
                     del drs[i]
-                    # print(str(d_rect.id) + ' deleted')
-                # else:
-                    # print(d_rect.id)
     
         self.rect.figure.canvas.draw()
 
@@ -59,8 +53,6 @@ class DraggableRectangle:
         x0, y0, xpress, ypress = self.press
         dx = event.xdata - xpress
         dy = event.ydata - ypress
-        #print('x0=%f, xpress=%f, event.xdata=%f, dx=%f, x0+dx=%f' %
-        #      (x0, xpress, event.xdata, dx, x0+dx))
         self.rect.set_x(x0+dx)
         self.rect.set_y(y0+dy)
 

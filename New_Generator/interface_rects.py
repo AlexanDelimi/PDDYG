@@ -1,3 +1,10 @@
+'''
+By running this file
+1) we can create a new distribution and store its image
+2) we can edit a stored distribution and store the new image
+3) we can delete distributions and their images.
+'''
+
 import os
 import re
 import tkinter as tk
