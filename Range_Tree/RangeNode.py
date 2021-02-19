@@ -13,6 +13,8 @@ class RangeNode():
     '''
 
     def __init__(self, value):
+        ''' Range node constructor. '''
+        
         self.value = value
         self.left_child = None
         self.right_child = None
