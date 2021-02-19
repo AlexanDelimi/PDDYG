@@ -7,6 +7,8 @@ class KdNode():
     ''' Contains the point, the right and the left child. '''
 
     def __init__(self, point, left_child, right_child):
+        ''' Kd Node contructor. '''
+        
         self.point = point
         self.left_child = left_child
         self.right_child = right_child
