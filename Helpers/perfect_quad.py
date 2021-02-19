@@ -1,3 +1,8 @@
+'''
+This file builds a specific Quad Tree and plots it
+to use it as example image in report.
+'''
+
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -24,9 +29,7 @@ lista = [
     (0.5,0.5), (2,1), (3,1), (4,1)
 ]
 
+# build Quad Tree
 capacity = 1
 qtree = QuadTree(capacity, lista)
 qtree.graph()
-
-# plt.scatter(*zip(*lista))
-# plt.show()

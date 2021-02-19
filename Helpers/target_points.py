@@ -1,3 +1,8 @@
+'''
+This file plots the inner and outter target points
+to use as example image in report.
+'''
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
